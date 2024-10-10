@@ -10,12 +10,16 @@ extension BuildContextExtension on BuildContext{
 }
 
 extension NumberExtension on BuildContext{
-  double get lowValue => dynamicHeight(0.01);
+  double get lowValue1 => dynamicHeight(0.01);
+  double get lowValue2 => dynamicHeight(0.02);
   double get mediumValue => dynamicHeight(0.03);
   double get highValue => dynamicHeight(0.05);
 }
 
 extension PaddingExtension on BuildContext{
-  EdgeInsets get paddingAllLow => EdgeInsets.all(lowValue);
+  EdgeInsets get paddingAllLow1 => EdgeInsets.all(lowValue1);
+  EdgeInsets get paddingAllLow2 => EdgeInsets.all(lowValue2);
   EdgeInsets get paddingHorizantalMedium => EdgeInsets.symmetric(horizontal: mediumValue);
+  EdgeInsets get paddingVerticalLow1 => EdgeInsets.symmetric(vertical: lowValue1);
+
 }

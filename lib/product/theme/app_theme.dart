@@ -1,7 +1,10 @@
 
+import 'package:film_oasis/product/constants/enum/button_padding.dart';
+import 'package:film_oasis/product/constants/enum/button_radius.dart';
 import 'package:film_oasis/product/constants/enum/icon_sizes.dart';
 import 'package:film_oasis/product/constants/project_colors.dart';
 import 'package:flutter/material.dart';
+
 
 abstract final class AppTheme {
 
@@ -14,7 +17,21 @@ abstract final class AppTheme {
       scrolledUnderElevation: 0,
       backgroundColor: ProjectColors.white,
       iconTheme: IconThemeData(size: IconSizes.normalIcon.value,),
-      color: ProjectColors.black,
+    ),
+    scaffoldBackgroundColor: ProjectColors.white,
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: ProjectColors.white,
+        foregroundColor: ProjectColors.grey,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(ButtonRadius.radius.value),),
+          side: BorderSide(color: ProjectColors.grey.withOpacity(0.50))
+        ),
+        padding: EdgeInsets.symmetric(horizontal: ButtonPadding.horizontal.value,
+        vertical: ButtonPadding.vertical.value
+        ),
+        elevation: 0,
+      )
     ),
     textTheme: const TextTheme(
       titleMedium: _titleMediumText,
@@ -42,7 +59,7 @@ const _bodyLarge = TextStyle(  // for appbar and title
 const _bodyMedium = TextStyle( // for film name
   color: ProjectColors.black,
   fontWeight: FontWeight.bold,
-  fontSize: 18,
+  fontSize: 16,
 );
 
 const _bodySmall = TextStyle( // for normal text
