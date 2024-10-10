@@ -1,0 +1,21 @@
+import 'package:flutter/material.dart' show BuildContext, EdgeInsets, MediaQuery, TextTheme,Theme;
+
+extension BuildContextExtension on BuildContext{
+  double dynamicHeight(double value) => MediaQuery.sizeOf(this).height * value;
+  double dynamicWidth(double value) => MediaQuery.sizeOf(this).width * value;
+
+  TextTheme textTheme(){
+    return Theme.of(this).textTheme;
+  }
+}
+
+extension NumberExtension on BuildContext{
+  double get lowValue => dynamicHeight(0.01);
+  double get mediumValue => dynamicHeight(0.03);
+  double get highValue => dynamicHeight(0.05);
+}
+
+extension PaddingExtension on BuildContext{
+  EdgeInsets get paddingAllLow => EdgeInsets.all(lowValue);
+  EdgeInsets get paddingHorizantalMedium => EdgeInsets.symmetric(horizontal: mediumValue);
+}
