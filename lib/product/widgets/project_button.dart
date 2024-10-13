@@ -14,6 +14,7 @@ class ProjectButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed, 
         child: Text(ProjectStrings.buttonName ,
-        style: context.textTheme().bodySmall?.copyWith(color: ProjectColors.grey)),),);
+        style: context.textTheme().bodySmall?.copyWith(
+          color: ProjectColors.grey,),),),);
   }
 }

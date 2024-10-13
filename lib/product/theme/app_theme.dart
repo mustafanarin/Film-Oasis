@@ -37,6 +37,7 @@ abstract final class AppTheme {
       bodyLarge: _bodyLarge,
       bodyMedium: _bodyMedium,
       bodySmall: _bodySmall,
+      labelMedium: _labelMedium,
       labelSmall: _labelSmall
     ),
   );
@@ -65,13 +66,18 @@ const _bodyMedium = TextStyle( // for film name
   fontSize: 15,
 );
 
-const _bodySmall = TextStyle( // for normal text
+const  _bodySmall = TextStyle( // for normal text
   fontFamily: 'Mulish-Regular',
-  color: ProjectColors.black,
-  fontWeight: FontWeight.w400,
+  color: ProjectColors.greyText,
+  fontWeight: FontWeight.w700,
   fontSize: 12,
 );
-
+const  _labelMedium = TextStyle( // for normal text
+  fontFamily: 'Mulish-Regular',
+  color: ProjectColors.black,
+  fontWeight: FontWeight.w700,
+  fontSize: 12,
+);
 const _labelSmall = TextStyle( // for genre
   fontFamily: 'Mulish-Bold',
   color: ProjectColors.cobaltBlue,

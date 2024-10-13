@@ -1,4 +1,3 @@
-
 import 'package:film_oasis/feature/home/model/genre_model.dart';
 import 'package:film_oasis/feature/home/model/now_showing_model.dart';
 import 'package:film_oasis/feature/home/model/popular_film_model.dart';
@@ -14,7 +13,6 @@ import 'package:film_oasis/product/widgets/project_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
   @override
@@ -22,11 +20,10 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomePage> {
-
   @override
   void initState() {
     super.initState();
-    Future.microtask((){
+    Future.microtask(() {
       ref.read(nowShowingProvider.notifier).getNowShowing();
       ref.read(popularFilmsProvider.notifier).getPopularFilms();
     });
@@ -34,7 +31,6 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    
     final nowShowing = ref.watch(nowShowingProvider);
     final popularFilms = ref.watch(popularFilmsProvider);
     final genres = ref.watch(genreProvider);
@@ -51,7 +47,10 @@ class _HomePageState extends ConsumerState<HomePage> {
               _RowTitleAndButton(title: ProjectStrings.popularTitle, onPressed: () {}),
               genres.when(
                 data: (genreModel) {
-                  return _ListViewPopularFilms(popularFilms: popularFilms,genreModel: genreModel,);
+                  return _ListViewPopularFilms(
+                    popularFilms: popularFilms,
+                    genreModel: genreModel,
+                  );
                 },
                 loading: CircularProgressIndicator.adaptive,
                 error: (error, stack) => const Text(ProjectStrings.errorGenres),
@@ -75,9 +74,8 @@ class _AppbarHomePage extends StatelessWidget implements PreferredSizeWidget {
       actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.settings_outlined))],
     );
   }
-  
-  @override
 
+  @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 
@@ -91,30 +89,30 @@ class _ListViewNowShowing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-     height: context.dynamicHeight(0.4),
-     child: nowShowing.isLoading ? 
-     const Center(child: CircularProgressIndicator.adaptive()) : 
-     OverflowBox(
-       maxWidth: context.dynamicWidth(1),
-       child: ListView.builder(
-         scrollDirection: Axis.horizontal,
-         itemCount: 6,
-         padding: context.paddingAllLow2,
-         itemBuilder: (context, index) {
-          final film = nowShowing.nowShowingModel.results?[index];
-          return Column(
-             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-               _ImageNetworkWithContainer(film: film?.posterPath, height: context.dynamicHeight(0.25)),
-               _TextFilmTitle(film: film),
-              _TextNowShowingIMBd(film: film),
-               const Spacer(),
-             ],
-           );
-         },
-       ),
-     ),
-                );
+      height: context.dynamicHeight(0.4),
+      child: nowShowing.isLoading
+          ? const Center(child: CircularProgressIndicator.adaptive())
+          : OverflowBox(
+              maxWidth: context.dynamicWidth(1),
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 6,
+                padding: context.paddingAllLow2,
+                itemBuilder: (context, index) {
+                  final film = nowShowing.nowShowingModel.results?[index];
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _ImageNetworkWithContainer(film: film?.posterPath, height: context.dynamicHeight(0.25)),
+                      _TextFilmTitle(film: film),
+                      _TextNowShowingIMBd(film: film),
+                      const Spacer(),
+                    ],
+                  );
+                },
+              ),
+            ),
+    );
   }
 }
 
@@ -134,31 +132,34 @@ class _TextFilmTitle extends StatelessWidget {
         child: Text(
           film?.title ?? '',
           style: context.textTheme().bodyMedium,
-         maxLines: 2, 
-          overflow: TextOverflow.ellipsis, 
-       ),
-     ),
-                            );
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ),
+    );
   }
 }
 
 class _TextNowShowingIMBd extends StatelessWidget {
   const _TextNowShowingIMBd({
-    required this.film, 
+    required this.film,
   });
 
   final Results? film;
 
   @override
   Widget build(BuildContext context) {
-    return Text("⭐️ ${film?.voteAverage?.toStringAsFixed(1) ?? ""}${ProjectStrings.imbdText}",
-    style: context.textTheme().bodySmall,);
+    return Text(
+      "⭐️ ${film?.voteAverage?.toStringAsFixed(1) ?? ""}${ProjectStrings.imbdText}",
+      style: context.textTheme().bodySmall,
+    );
   }
 }
 
 class _ListViewPopularFilms extends StatelessWidget {
   const _ListViewPopularFilms({
-    required this.popularFilms, required this.genreModel,
+    required this.popularFilms,
+    required this.genreModel,
   });
 
   final PopularFilmsState popularFilms;
@@ -176,8 +177,10 @@ class _ListViewPopularFilms extends StatelessWidget {
           padding: context.paddingVerticalLow1,
           child: Row(
             children: [
-              _ImageNetworkWithContainer(film: popularFilm?.posterPath, 
-              height: context.dynamicHeight(0.19),),
+              _ImageNetworkWithContainer(
+                film: popularFilm?.posterPath,
+                height: context.dynamicHeight(0.19),
+              ),
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.only(left: context.lowValue2, bottom: context.lowValue1),
@@ -185,11 +188,14 @@ class _ListViewPopularFilms extends StatelessWidget {
                     height: context.dynamicHeight(0.19),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         _TextFilmName(popularFilm: popularFilm),
                         _TextIMBd(popularFilm: popularFilm),
-                        _ContainerGenreOfFilm(popularFilm: popularFilm,genreModel: genreModel,),
+                        _ContainerGenreOfFilm(
+                          popularFilm: popularFilm,
+                          genreModel: genreModel,
+                        ),
                         _TextFilmRelaseDate(popularFilm: popularFilm),
                         const SizedBox(height: 1),
                       ],
@@ -214,7 +220,10 @@ class _TextFilmName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(popularFilm?.title ?? '', style: context.textTheme().bodyMedium,);
+    return Text(
+      popularFilm?.title ?? '',
+      style: context.textTheme().bodyMedium,
+    );
   }
 }
 
@@ -227,14 +236,19 @@ class _TextIMBd extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text("⭐️ ${popularFilm?.voteAverage?.toStringAsFixed(1) ?? ''}${ProjectStrings.imbdText}",
-      style: context.textTheme().bodySmall?.copyWith(color: ProjectColors.grey600),);
+    return Text(
+      "⭐️ ${popularFilm?.voteAverage?.toStringAsFixed(1) ?? ''}${ProjectStrings.imbdText}",
+      style: context.textTheme().bodySmall?.copyWith(
+            color: ProjectColors.grey600,
+          ),
+    );
   }
 }
 
 class _ContainerGenreOfFilm extends StatelessWidget {
   const _ContainerGenreOfFilm({
-    required this.popularFilm, required this.genreModel,
+    required this.popularFilm,
+    required this.genreModel,
   });
 
   final GenreModel genreModel;
@@ -246,19 +260,20 @@ class _ContainerGenreOfFilm extends StatelessWidget {
       spacing: 4,
       runSpacing: 4,
       children: popularFilm?.genreIds?.map((genreId) {
-        final genre = genreModel.genres?.firstWhere(
-          (g) => g.id == genreId, 
-          orElse: () => Genre(id: -1, name: ''),
-        );
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(ProjectRadius.genreContainer.value),
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: context.lowValue2, vertical: context.dynamicHeight(0.006)),
-            color: ProjectColors.lavender,
-            child: Text(genre?.name?.toUpperCase() ?? '', style:context.textTheme().labelSmall),
-          ),
-        );
-      }).toList() ?? [],
+            final genre = genreModel.genres?.firstWhere(
+              (g) => g.id == genreId,
+              orElse: () => Genre(id: -1, name: ''),
+            );
+            return ClipRRect(
+              borderRadius: BorderRadius.circular(ProjectRadius.genreContainer.value),
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: context.lowValue2, vertical: context.dynamicHeight(0.006)),
+                color: ProjectColors.lavender,
+                child: Text(genre?.name?.toUpperCase() ?? '', style: context.textTheme().labelSmall),
+              ),
+            );
+          }).toList() ??
+          [],
     );
   }
 }
@@ -272,13 +287,17 @@ class _TextFilmRelaseDate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(popularFilm?.releaseDate ?? '', style: context.textTheme().bodySmall,);
+    return Text(
+      popularFilm?.releaseDate ?? '',
+      style: context.textTheme().bodySmall,
+    );
   }
 }
 
 class _ImageNetworkWithContainer extends StatelessWidget {
   const _ImageNetworkWithContainer({
-    required this.film, required this.height,
+    required this.film,
+    required this.height,
   });
 
   final String? film;
@@ -287,38 +306,42 @@ class _ImageNetworkWithContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-     decoration: BoxDecoration(
-      boxShadow: [
-        BoxShadow(
-          color: Colors.black.withOpacity(0.3), 
-        spreadRadius: 3, 
-          blurRadius: 10,   
-        offset: const Offset(0, 3), 
-        ),
-      ],
-     ),
-     child: ClipRRect(
-       borderRadius: BorderRadius.circular(5), 
-       child: film != null ? 
-       Image.network(
-      height: height,
-      width: height*2/3,
-         '${ProjectStrings.filmImagePath}$film',
-       errorBuilder: (context, error, stackTrace) => const Icon(Icons.error),
-       fit: BoxFit.cover,
-     ) : 
-     SizedBox(
-      height: height,
-      width: height*2/3,
-      child: const Placeholder(color: ProjectColors.grey,),),
-    ),
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.3),
+            spreadRadius: 3,
+            blurRadius: 10,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(5),
+        child: film != null
+            ? Image.network(
+                height: height,
+                width: height * 2 / 3,
+                '${ProjectStrings.filmImagePath}$film',
+                errorBuilder: (context, error, stackTrace) => const Icon(Icons.error),
+                fit: BoxFit.cover,
+              )
+            : SizedBox(
+                height: height,
+                width: height * 2 / 3,
+                child: const Placeholder(
+                  color: ProjectColors.grey,
+                ),
+              ),
+      ),
     );
   }
 }
 
 class _RowTitleAndButton extends StatelessWidget {
   const _RowTitleAndButton({
-    required this.title, required this.onPressed, 
+    required this.title,
+    required this.onPressed,
   });
   final String title;
   final VoidCallback onPressed;
@@ -327,7 +350,10 @@ class _RowTitleAndButton extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(title,style: context.textTheme().bodyLarge,),
+        Text(
+          title,
+          style: context.textTheme().bodyLarge,
+        ),
         ProjectButton(onPressed: onPressed),
       ],
     );

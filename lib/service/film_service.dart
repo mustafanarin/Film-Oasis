@@ -31,6 +31,7 @@ class FilmService implements IFilmService {
         final data = response.data;
         if (data != null && data.containsKey('results')) {
           return NowShowingModel.fromJson(data);
+          
         } else {
           throw MyDioException('Error: Data not available!');
         }
