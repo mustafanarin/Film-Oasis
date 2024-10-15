@@ -5,13 +5,11 @@ final class NowShowingModel {
 
   factory NowShowingModel.fromJson(Map<String, dynamic> json) {
     return NowShowingModel(
-      results: (json['results'] as List<dynamic>?)
-          ?.map((e) => Results.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      results: (json['results'] as List<dynamic>?)?.map((e) => Results.fromJson(e as Map<String, dynamic>)).toList(),
     );
   }
-  
-  List<Results>? results;
+
+  final List<Results>? results;
 }
 
 final class Results {
@@ -33,7 +31,7 @@ final class Results {
       overview: json['overview'] as String?,
       posterPath: json['poster_path'] as String?,
       title: json['title'] as String?,
-      voteAverage: (json['vote_average'] as num?)?.toDouble(), 
+      voteAverage: (json['vote_average'] as num?)?.toDouble(),
     );
   }
 
@@ -43,5 +41,5 @@ final class Results {
   final String? overview;
   final String? posterPath;
   final String? title;
-  final double? voteAverage; 
+  final double? voteAverage;
 }

@@ -1,4 +1,8 @@
+import 'package:film_oasis/product/constants/project_strings.dart';
+import 'package:film_oasis/product/core/format_number.dart';
 import 'package:film_oasis/product/extensions/context_extension.dart';
+import 'package:film_oasis/product/provider/app_provider_items.dart';
+import 'package:film_oasis/product/widgets/text_film_imbd.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -10,7 +14,18 @@ class DetailPage extends ConsumerStatefulWidget {
 
 class _DetailPageState extends ConsumerState<DetailPage> {
   @override
+  void initState() {
+    super.initState();
+    Future.microtask(() {
+      ref.read(AppProviderItems.filmDetailProvider.notifier).getFilmDetail(726139);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final detail = ref.watch(AppProviderItems.filmDetailProvider);
+    final film = detail.filmDetailModel;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -34,11 +49,8 @@ class _DetailPageState extends ConsumerState<DetailPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Spiderman eve donus', style: context.textTheme().titleMedium),
-                          Text(
-                            '⭐️ 6.2/10 IMBd',
-                            style: context.textTheme().bodySmall,
-                          ),
+                          Text(film.title ?? '', style: context.textTheme().titleMedium),
+                          TextFilmIMBd(imbd: film.voteAverage),
                           Row(
                             children: [
                               Column(
@@ -48,35 +60,35 @@ class _DetailPageState extends ConsumerState<DetailPage> {
                                     style: context.textTheme().bodySmall,
                                   ),
                                   Text(
-                                    r'750000 $',
+                                    '${FormatNumber.formatBudgetWithDots(film.budget)} \$',
                                     style: context.textTheme().labelMedium,
-                                  )
+                                  ),
                                 ],
                               ),
                               const Spacer(),
                               Column(
                                 children: [
                                   Text(
-                                    'Budget',
+                                    'Country',
                                     style: context.textTheme().bodySmall,
                                   ),
                                   Text(
-                                    r'750000 $',
+                                    film.originCountry?[0] ?? '-',
                                     style: context.textTheme().labelMedium,
-                                  )
+                                  ),
                                 ],
                               ),
                               const Spacer(),
                               Column(
                                 children: [
                                   Text(
-                                    'Budget',
+                                    'Language',
                                     style: context.textTheme().bodySmall,
                                   ),
                                   Text(
-                                    r'750000 $',
+                                    film.spokenLanguages?[0].englishName ?? '-',
                                     style: context.textTheme().labelMedium,
-                                  )
+                                  ),
                                 ],
                               ),
                               const Spacer(),
@@ -87,7 +99,7 @@ class _DetailPageState extends ConsumerState<DetailPage> {
                             style: context.textTheme().bodyLarge,
                           ),
                           Text(
-                            'Mustafa narin' * 20,
+                            film.overview ?? "-",
                             style: context.textTheme().bodySmall,
                           ),
                           Text(
@@ -100,17 +112,18 @@ class _DetailPageState extends ConsumerState<DetailPage> {
                               scrollDirection: Axis.horizontal,
                               itemCount: 4,
                               itemBuilder: (context, index) {
+                                final company = film.productionCompanies?[index];
                                 return Padding(
                                   padding: const EdgeInsets.only(right: 15),
                                   child: Column(
                                     children: [
-                                      Container(
+                                      Image.network(
                                         height: 75,
                                         width: 75,
-                                        color: Colors.blue,
+                                        "${ProjectStrings.filmImagePath}${company?.logoPath}"
                                       ),
                                       Text(
-                                        'dataaa',
+                                        company?.name ?? "",
                                         style: context.textTheme().labelMedium,
                                       ),
                                     ],

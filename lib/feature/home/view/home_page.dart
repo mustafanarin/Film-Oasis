@@ -9,6 +9,7 @@ import 'package:film_oasis/product/constants/project_strings.dart';
 import 'package:film_oasis/product/extensions/context_extension.dart';
 import 'package:film_oasis/product/provider/app_provider_items.dart';
 import 'package:film_oasis/product/widgets/project_button.dart';
+import 'package:film_oasis/product/widgets/text_film_imbd.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -104,7 +105,7 @@ class _ListViewNowShowing extends StatelessWidget {
                     children: [
                       _ImageNetworkWithContainer(film: film?.posterPath, height: context.dynamicHeight(0.25)),
                       _TextFilmTitle(film: film),
-                      _TextNowShowingIMBd(film: film),
+                      TextFilmIMBd(imbd: film?.voteAverage),
                       const Spacer(),
                     ],
                   );
@@ -139,21 +140,7 @@ class _TextFilmTitle extends StatelessWidget {
   }
 }
 
-class _TextNowShowingIMBd extends StatelessWidget {
-  const _TextNowShowingIMBd({
-    required this.film,
-  });
 
-  final Results? film;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      "⭐️ ${film?.voteAverage?.toStringAsFixed(1) ?? ""}${ProjectStrings.imbdText}",
-      style: context.textTheme().bodySmall,
-    );
-  }
-}
 
 class _ListViewPopularFilms extends StatelessWidget {
   const _ListViewPopularFilms({

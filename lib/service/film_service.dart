@@ -1,6 +1,7 @@
 import 'dart:io' show HttpStatus;
 
 import 'package:dio/dio.dart';
+import 'package:film_oasis/feature/home/model/film_detail_model.dart';
 import 'package:film_oasis/feature/home/model/genre_model.dart';
 import 'package:film_oasis/feature/home/model/now_showing_model.dart';
 import 'package:film_oasis/feature/home/model/popular_film_model.dart';
@@ -11,6 +12,7 @@ abstract class IFilmService {
   Future<NowShowingModel> getNowShowing();
   Future<PopularFilmModel> getPopularFilms();
   Future<GenreModel> getGenres();
+  Future<FilmDetailModel> getFilmDetail(int filmId);
 }
 
 class FilmService implements IFilmService {
@@ -69,6 +71,23 @@ class FilmService implements IFilmService {
     }
   }
 
+  @override
+  Future<FilmDetailModel> getFilmDetail(int filmId) async {
+    try {
+      final response = await _dio.get<Map<String, dynamic>>(
+        '${_FilmApiPath.detail.value}/$filmId',
+      );
+      _checkResponseStatus(response);
+
+      final data = _extractData(response.data, isResultsRequired: false);
+      return FilmDetailModel.fromJson(data);
+    } on DioException catch (e) {
+      throw AppDioException('API Error: ${e.message}');
+    } catch (e) {
+      throw AppDioException('An unknown error occurred: $e');
+    }
+  }
+
   void _checkResponseStatus(Response<Map<String, dynamic>> response) {
     if (response.statusCode != HttpStatus.ok) {
       throw AppDioException('Failed to load data', statusCode: response.statusCode);
@@ -87,7 +106,8 @@ class FilmService implements IFilmService {
 enum _FilmApiPath {
   nowPlaying('movie/now_playing'),
   popular('movie/popular'),
-  genreMovie('genre/movie/list');
+  genreMovie('genre/movie/list'),
+  detail('movie');
 
   const _FilmApiPath(this.value);
 

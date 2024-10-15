@@ -1,5 +1,5 @@
-class ProviderException implements Exception {
-  ProviderException({
+class AppProviderException implements Exception {
+  AppProviderException({
     required this.message,
   });
 
