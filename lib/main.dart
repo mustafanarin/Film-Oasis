@@ -10,7 +10,6 @@ Future<void> main() async {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -20,7 +19,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: ProjectStrings.projectName,
       theme: AppTheme.getLightTheme,
-      home:  DetailPage(),
+      home: const DetailPage(),
     );
   }
 }

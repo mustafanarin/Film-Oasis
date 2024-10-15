@@ -11,10 +11,10 @@ final class PopularFilmModel {
     );
   }
 
-  List<MovieResult>? results;
+  final List<MovieResult>? results;
 }
 
-class MovieResult {
+final class MovieResult {
   MovieResult({
     this.backdropPath,
     this.genreIds,
@@ -39,12 +39,12 @@ class MovieResult {
     );
   }
 
-  String? backdropPath;
-  List<int>? genreIds;
-  int? id;
-  String? originalTitle;
-  String? posterPath;
-  String? releaseDate;
-  String? title;
-  double? voteAverage;
+  final String? backdropPath;
+  final List<int>? genreIds;
+  final int? id;
+  final String? originalTitle;
+  final String? posterPath;
+  final String? releaseDate;
+  final String? title;
+  final double? voteAverage;
 }

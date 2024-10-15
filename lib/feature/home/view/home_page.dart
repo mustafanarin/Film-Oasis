@@ -1,14 +1,13 @@
 import 'package:film_oasis/feature/home/model/genre_model.dart';
 import 'package:film_oasis/feature/home/model/now_showing_model.dart';
 import 'package:film_oasis/feature/home/model/popular_film_model.dart';
-import 'package:film_oasis/feature/home/provider/now_showing_provider.dart';
-import 'package:film_oasis/feature/home/provider/popular_films_provider.dart';
 import 'package:film_oasis/feature/home/state/now_showing_state.dart';
 import 'package:film_oasis/feature/home/state/popular_films_state.dart';
 import 'package:film_oasis/product/constants/enum/project_radius.dart';
 import 'package:film_oasis/product/constants/project_colors.dart';
 import 'package:film_oasis/product/constants/project_strings.dart';
 import 'package:film_oasis/product/extensions/context_extension.dart';
+import 'package:film_oasis/product/provider/app_provider_items.dart';
 import 'package:film_oasis/product/widgets/project_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,16 +23,16 @@ class _HomePageState extends ConsumerState<HomePage> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      ref.read(nowShowingProvider.notifier).getNowShowing();
-      ref.read(popularFilmsProvider.notifier).getPopularFilms();
+      ref.read(AppProviderItems.nowShowingProvider.notifier).getNowShowing();
+      ref.read(AppProviderItems.popularFilmsProvider.notifier).getPopularFilms();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final nowShowing = ref.watch(nowShowingProvider);
-    final popularFilms = ref.watch(popularFilmsProvider);
-    final genres = ref.watch(genreProvider);
+    final nowShowing = ref.watch(AppProviderItems.nowShowingProvider);
+    final popularFilms = ref.watch(AppProviderItems.popularFilmsProvider);
+    final genres = ref.watch(AppProviderItems.genreProvider);
 
     return Scaffold(
       appBar: const _AppbarHomePage(),
@@ -265,9 +264,12 @@ class _ContainerGenreOfFilm extends StatelessWidget {
               orElse: () => Genre(id: -1, name: ''),
             );
             return ClipRRect(
-              borderRadius: BorderRadius.circular(ProjectRadius.genreContainer.value),
+              borderRadius: BorderRadius.circular(ProjectRadius.normal.value),
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: context.lowValue2, vertical: context.dynamicHeight(0.006)),
+                padding: EdgeInsets.symmetric(
+                  horizontal: context.lowValue2,
+                  vertical: context.dynamicHeight(0.006),
+                ),
                 color: ProjectColors.lavender,
                 child: Text(genre?.name?.toUpperCase() ?? '', style: context.textTheme().labelSmall),
               ),
@@ -354,7 +356,7 @@ class _RowTitleAndButton extends StatelessWidget {
           title,
           style: context.textTheme().bodyLarge,
         ),
-        ProjectButton(onPressed: onPressed),
+        SeeMoreButton(onPressed: onPressed),
       ],
     );
   }

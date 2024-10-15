@@ -11,10 +11,10 @@ final class GenreModel {
     );
   }
 
-  List<Genre>? genres;
+  final List<Genre>? genres;
 }
 
-class Genre {
+final class Genre {
   Genre({
     this.id,
     this.name,
@@ -27,6 +27,6 @@ class Genre {
     );
   }
 
-  int? id;
-  String? name;
+  final int? id;
+  final String? name;
 }

@@ -14,7 +14,7 @@ final class NowShowingModel {
   List<Results>? results;
 }
 
-class Results {
+final class Results {
   Results({
     this.backdropPath,
     this.id,
@@ -37,11 +37,11 @@ class Results {
     );
   }
 
-  String? backdropPath;
-  int? id;
-  String? originalTitle;
-  String? overview;
-  String? posterPath;
-  String? title;
-  double? voteAverage; 
+  final String? backdropPath;
+  final int? id;
+  final String? originalTitle;
+  final String? overview;
+  final String? posterPath;
+  final String? title;
+  final double? voteAverage; 
 }

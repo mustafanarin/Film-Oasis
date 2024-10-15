@@ -1,6 +1,6 @@
 enum ProjectRadius {
-  button(30),
-  genreContainer(20); 
+  large(30),
+  normal(20); 
   const ProjectRadius(this.value);
 
 
