@@ -42,6 +42,10 @@ abstract final class AppTheme {
           labelMedium: _ProjectTextStyle.labelMedium,
           labelSmall: _ProjectTextStyle.labelSmall,
         ),
+        snackBarTheme: SnackBarThemeData(
+          backgroundColor: ProjectColors.cobaltBlue,
+          actionTextColor: ProjectColors.white
+        )
       );
 }
 

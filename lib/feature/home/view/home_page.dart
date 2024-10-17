@@ -1,13 +1,12 @@
-import 'package:film_oasis/feature/home/model/genre_model.dart';
 import 'package:film_oasis/feature/home/model/now_showing_model.dart';
 import 'package:film_oasis/feature/home/model/popular_film_model.dart';
 import 'package:film_oasis/feature/home/state/now_showing_state.dart';
 import 'package:film_oasis/feature/home/state/popular_films_state.dart';
-import 'package:film_oasis/product/constants/enum/project_radius.dart';
 import 'package:film_oasis/product/constants/project_colors.dart';
 import 'package:film_oasis/product/constants/project_strings.dart';
 import 'package:film_oasis/product/extensions/context_extension.dart';
 import 'package:film_oasis/product/provider/app_provider_items.dart';
+import 'package:film_oasis/product/widgets/genre_chips.dart';
 import 'package:film_oasis/product/widgets/project_button.dart';
 import 'package:film_oasis/product/widgets/text_film_imbd.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +32,7 @@ class _HomePageState extends ConsumerState<HomePage> {
   Widget build(BuildContext context) {
     final nowShowing = ref.watch(AppProviderItems.nowShowingProvider);
     final popularFilms = ref.watch(AppProviderItems.popularFilmsProvider);
-    final genres = ref.watch(AppProviderItems.genreProvider);
+    
 
     return Scaffold(
       appBar: const _AppbarHomePage(),
@@ -45,16 +44,7 @@ class _HomePageState extends ConsumerState<HomePage> {
               _RowTitleAndButton(title: ProjectStrings.showingTitle, onPressed: () {}),
               _ListViewNowShowing(nowShowing: nowShowing),
               _RowTitleAndButton(title: ProjectStrings.popularTitle, onPressed: () {}),
-              genres.when(
-                data: (genreModel) {
-                  return _ListViewPopularFilms(
-                    popularFilms: popularFilms,
-                    genreModel: genreModel,
-                  );
-                },
-                loading: CircularProgressIndicator.adaptive,
-                error: (error, stack) => const Text(ProjectStrings.errorGenres),
-              ),
+              _PopularFilmsSection(popularFilms: popularFilms),
             ],
           ),
         ),
@@ -103,7 +93,8 @@ class _ListViewNowShowing extends StatelessWidget {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _ImageNetworkWithContainer(film: film?.posterPath, height: context.dynamicHeight(0.25)),
+                      _ImageNetworkWithContainer(film: film?.posterPath, 
+                      height: context.dynamicHeight(0.25)),
                       _TextFilmTitle(film: film),
                       TextFilmIMBd(imbd: film?.voteAverage),
                       const Spacer(),
@@ -140,62 +131,70 @@ class _TextFilmTitle extends StatelessWidget {
   }
 }
 
-
-
-class _ListViewPopularFilms extends StatelessWidget {
-  const _ListViewPopularFilms({
+class _PopularFilmsSection extends ConsumerWidget {
+  const _PopularFilmsSection({
     required this.popularFilms,
-    required this.genreModel,
   });
 
   final PopularFilmsState popularFilms;
-  final GenreModel genreModel;
 
   @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: 6,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemBuilder: (context, index) {
-        final popularFilm = popularFilms.popularFilmsModel.results?[index];
-        return Padding(
-          padding: context.paddingVerticalLow1,
-          child: Row(
-            children: [
-              _ImageNetworkWithContainer(
-                film: popularFilm?.posterPath,
-                height: context.dynamicHeight(0.19),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.only(left: context.lowValue2, bottom: context.lowValue1),
-                  child: SizedBox(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final genreAsync = ref.watch(AppProviderItems.genreProvider);
+
+    return genreAsync.when(
+      error: (error, stack) => const Text(ProjectStrings.errorGenres),
+      loading: () => const CircularProgressIndicator.adaptive(),
+      data: (genreModel) {
+        return ListView.builder(
+          itemCount: 6,
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (context, index) {
+            final popularFilm = popularFilms.popularFilmsModel.results?[index];
+            return Padding(
+              padding: context.paddingVerticalLow1,
+              child: Row(
+                children: [
+                  _ImageNetworkWithContainer(
+                    film: popularFilm?.posterPath,
                     height: context.dynamicHeight(0.19),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        _TextFilmName(popularFilm: popularFilm),
-                        _TextIMBd(popularFilm: popularFilm),
-                        _ContainerGenreOfFilm(
-                          popularFilm: popularFilm,
-                          genreModel: genreModel,
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        left: context.lowValue2,
+                        bottom: context.lowValue1,
+                      ),
+                      child: SizedBox(
+                        height: context.dynamicHeight(0.19),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            _TextFilmName(popularFilm: popularFilm),
+                            _TextIMBd(popularFilm: popularFilm),
+                            GenreChips.fromIds(
+                              genreIds: popularFilm?.genreIds,
+                              genreModel: genreModel,
+                            ),
+                            _TextFilmRelaseDate(popularFilm: popularFilm),
+                            const SizedBox(height: 1),
+                          ],
                         ),
-                        _TextFilmRelaseDate(popularFilm: popularFilm),
-                        const SizedBox(height: 1),
-                      ],
+                      ),
                     ),
                   ),
-                ),
+                ],
               ),
-            ],
-          ),
+            );
+          },
         );
       },
     );
   }
 }
+
 
 class _TextFilmName extends StatelessWidget {
   const _TextFilmName({
@@ -227,42 +226,6 @@ class _TextIMBd extends StatelessWidget {
       style: context.textTheme().bodySmall?.copyWith(
             color: ProjectColors.grey600,
           ),
-    );
-  }
-}
-
-class _ContainerGenreOfFilm extends StatelessWidget {
-  const _ContainerGenreOfFilm({
-    required this.popularFilm,
-    required this.genreModel,
-  });
-
-  final GenreModel genreModel;
-  final MovieResult? popularFilm;
-
-  @override
-  Widget build(BuildContext context) {
-    return Wrap(
-      spacing: 4,
-      runSpacing: 4,
-      children: popularFilm?.genreIds?.map((genreId) {
-            final genre = genreModel.genres?.firstWhere(
-              (g) => g.id == genreId,
-              orElse: () => Genre(id: -1, name: ''),
-            );
-            return ClipRRect(
-              borderRadius: BorderRadius.circular(ProjectRadius.normal.value),
-              child: Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: context.lowValue2,
-                  vertical: context.dynamicHeight(0.006),
-                ),
-                color: ProjectColors.lavender,
-                child: Text(genre?.name?.toUpperCase() ?? '', style: context.textTheme().labelSmall),
-              ),
-            );
-          }).toList() ??
-          [],
     );
   }
 }

@@ -1,10 +1,16 @@
+import 'package:film_oasis/feature/home/model/film_detail_model.dart';
+import 'package:film_oasis/feature/home/model/genre_model.dart' as film_genre;
+import 'package:film_oasis/product/constants/enum/project_radius.dart';
+import 'package:film_oasis/product/constants/project_colors.dart';
 import 'package:film_oasis/product/constants/project_strings.dart';
 import 'package:film_oasis/product/core/format_number.dart';
 import 'package:film_oasis/product/extensions/context_extension.dart';
 import 'package:film_oasis/product/provider/app_provider_items.dart';
+import 'package:film_oasis/product/widgets/genre_chips.dart';
 import 'package:film_oasis/product/widgets/text_film_imbd.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailPage extends ConsumerStatefulWidget {
   const DetailPage({super.key});
@@ -21,126 +27,420 @@ class _DetailPageState extends ConsumerState<DetailPage> {
     });
   }
 
+  Future<void> _launchUrl(Uri url, BuildContext context) async {
+    try {
+      await launchUrl(
+        url,
+        mode: LaunchMode.externalApplication,
+      );
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text(
+              ProjectStrings.snackBarLinkError,
+            ),
+            duration: const Duration(seconds: 2),
+            action: SnackBarAction(
+              label: ProjectStrings.snacbarActionText,
+              onPressed: () {
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+              },
+            ),
+          ),
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final detail = ref.watch(AppProviderItems.filmDetailProvider);
     final film = detail.filmDetailModel;
+    final filmUrl = Uri.parse(film.homepage ?? '');
 
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            height: context.dynamicHeight(0.35),
-            color: Colors.amber,
-          ),
-          SizedBox(height: context.dynamicHeight(0.3)),
-          Column(
-            children: [
-              SizedBox(height: context.dynamicHeight(0.3)),
-              Expanded(
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-                  ),
-                  child: Padding(
-                    padding: context.paddingAllLow2,
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(film.title ?? '', style: context.textTheme().titleMedium),
-                          TextFilmIMBd(imbd: film.voteAverage),
-                          Row(
+      body: detail.isLoading
+          ? const Center(
+              child: CircularProgressIndicator.adaptive(),
+            )
+          : Stack(
+              children: [
+                _BackdropImage(
+                  film: film,
+                  onLinkPressed: () => _launchUrl(filmUrl, context),
+                ),
+                SizedBox(height: context.dynamicHeight(0.3)),
+                Column(
+                  children: [
+                    SizedBox(height: context.dynamicHeight(0.3)),
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: ProjectColors.white,
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(ProjectRadius.small.value),
+                          ),
+                        ),
+                        child: Padding(
+                          padding: context.paddingAllLow2,
+                          child: Column(
                             children: [
-                              Column(
-                                children: [
-                                  Text(
-                                    'Budget',
-                                    style: context.textTheme().bodySmall,
-                                  ),
-                                  Text(
-                                    '${FormatNumber.formatBudgetWithDots(film.budget)} \$',
-                                    style: context.textTheme().labelMedium,
-                                  ),
-                                ],
-                              ),
-                              const Spacer(),
-                              Column(
-                                children: [
-                                  Text(
-                                    'Country',
-                                    style: context.textTheme().bodySmall,
-                                  ),
-                                  Text(
-                                    film.originCountry?[0] ?? '-',
-                                    style: context.textTheme().labelMedium,
-                                  ),
-                                ],
-                              ),
-                              const Spacer(),
-                              Column(
-                                children: [
-                                  Text(
-                                    'Language',
-                                    style: context.textTheme().bodySmall,
-                                  ),
-                                  Text(
-                                    film.spokenLanguages?[0].englishName ?? '-',
-                                    style: context.textTheme().labelMedium,
-                                  ),
-                                ],
-                              ),
-                              const Spacer(),
-                            ],
-                          ),
-                          Text(
-                            'Description',
-                            style: context.textTheme().bodyLarge,
-                          ),
-                          Text(
-                            film.overview ?? "-",
-                            style: context.textTheme().bodySmall,
-                          ),
-                          Text(
-                            'Companies',
-                            style: context.textTheme().bodyLarge,
-                          ),
-                          SizedBox(
-                            height: 100,
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: 4,
-                              itemBuilder: (context, index) {
-                                final company = film.productionCompanies?[index];
-                                return Padding(
-                                  padding: const EdgeInsets.only(right: 15),
+                              Expanded(
+                                child: SingleChildScrollView(
                                   child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Image.network(
-                                        height: 75,
-                                        width: 75,
-                                        "${ProjectStrings.filmImagePath}${company?.logoPath}"
-                                      ),
-                                      Text(
-                                        company?.name ?? "",
-                                        style: context.textTheme().labelMedium,
-                                      ),
+                                      _TextFilmTitle(film: film),
+                                      _TextIMDb(film: film),
+                                      _GenreChipsFilm(film: film),
+                                      _RowFilmInfos(film: film),
+                                      const _TextDescriptonTitle(),
+                                      _TextDescription(film: film),
                                     ],
                                   ),
-                                );
-                              },
-                            ),
+                                ),
+                              ),
+                              _CompaniesTitleAndCompaniesRow(film: film),
+                            ],
                           ),
-                        ],
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
+              ],
+            ),
+    );
+  }
+}
+
+class _BackdropImage extends StatelessWidget {
+  const _BackdropImage({
+    required this.film,
+    required this.onLinkPressed,
+  });
+
+  final FilmDetailModel film;
+  final VoidCallback onLinkPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        SizedBox(
+          height: context.dynamicHeight(0.32),
+          width: context.dynamicWidth(1),
+          child: film.backdropPath != null
+              ? Image.network(
+                  "${ProjectStrings.filmImagePath}${film.backdropPath}",
+                  fit: BoxFit.cover,
+                )
+              : const Placeholder(),
+        ),
+        Positioned(
+          top: context.dynamicHeight(0.13),
+          left: context.dynamicWidth(0.45),
+          child: CircleAvatar(
+            backgroundColor: Colors.white,
+            radius: ProjectRadius.medium.value,
+            child: IconButton(
+              onPressed: onLinkPressed,
+              icon: const Icon(
+                Icons.link_outlined,
+                color: ProjectColors.black,
               ),
-            ],
+            ),
           ),
-        ],
+        ),
+      ],
+    );
+  }
+}
+
+class _RowFilmInfos extends StatelessWidget {
+  const _RowFilmInfos({
+    required this.film,
+  });
+
+  final FilmDetailModel film;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        _TextCountryColumn(film: film),
+        const Spacer(),
+        _TextLanguageColumn(film: film),
+        const Spacer(),
+        _TextBudgetColumn(film: film),
+        const Spacer(),
+      ],
+    );
+  }
+}
+
+class _TextFilmTitle extends StatelessWidget {
+  const _TextFilmTitle({
+    required this.film,
+  });
+
+  final FilmDetailModel film;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      film.title ?? '',
+      style: context.textTheme().titleMedium,
+    );
+  }
+}
+
+class _TextIMDb extends StatelessWidget {
+  const _TextIMDb({
+    required this.film,
+  });
+
+  final FilmDetailModel film;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        top: context.lowValue1,
+      ),
+      child: TextFilmIMBd(
+        imbd: film.voteAverage,
+      ),
+    );
+  }
+}
+
+class _TextCountryColumn extends StatelessWidget {
+  const _TextCountryColumn({
+    required this.film,
+  });
+
+  final FilmDetailModel film;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          ProjectStrings.country,
+          style: context.textTheme().bodySmall,
+        ),
+        Text(
+          film.originCountry?[0] ?? '-',
+          style: context.textTheme().labelMedium,
+        ),
+      ],
+    );
+  }
+}
+
+class _TextLanguageColumn extends StatelessWidget {
+  const _TextLanguageColumn({
+    required this.film,
+  });
+
+  final FilmDetailModel film;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          ProjectStrings.language,
+          style: context.textTheme().bodySmall,
+        ),
+        Text(
+          film.spokenLanguages?[0].englishName ?? '-',
+          style: context.textTheme().labelMedium,
+        ),
+      ],
+    );
+  }
+}
+
+class _TextBudgetColumn extends StatelessWidget {
+  const _TextBudgetColumn({
+    required this.film,
+  });
+
+  final FilmDetailModel film;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          ProjectStrings.budget,
+          style: context.textTheme().bodySmall,
+        ),
+        Text(
+          '${FormatNumber.formatBudgetWithDots(
+            film.budget,
+          )} \$',
+          style: context.textTheme().labelMedium,
+        ),
+      ],
+    );
+  }
+}
+
+class _TextDescriptonTitle extends StatelessWidget {
+  const _TextDescriptonTitle();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        top: context.lowValue2,
+      ),
+      child: Text(
+        ProjectStrings.description,
+        style: context.textTheme().bodyLarge,
+      ),
+    );
+  }
+}
+
+class _TextDescription extends StatelessWidget {
+  const _TextDescription({
+    required this.film,
+  });
+
+  final FilmDetailModel film;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      film.overview ?? '-',
+      style: context.textTheme().bodySmall,
+    );
+  }
+}
+
+class _CompaniesTitleAndCompaniesRow extends StatelessWidget {
+  const _CompaniesTitleAndCompaniesRow({
+    required this.film,
+  });
+
+  final FilmDetailModel film;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(
+            top: context.mediumValue,
+          ),
+          child: Text(
+            ProjectStrings.companies,
+            style: context.textTheme().bodyLarge,
+          ),
+        ),
+        SizedBox(
+          height: context.dynamicHeight(0.16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: List.generate(
+              4,
+              (index) {
+                final company = film.productionCompanies?[index];
+                return Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 5,
+                    ),
+                    child: Column(
+                      children: [
+                        _ImageCompanies(company: company),
+                        SizedBox(
+                          height: context.lowValue1,
+                        ),
+                        _TextCompaniesName(company: company),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _ImageCompanies extends StatelessWidget {
+  const _ImageCompanies({
+    required this.company,
+  });
+
+  final ProductionCompany? company;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      flex: 2,
+      child: company?.logoPath != null
+          ? Image.network(
+              "${ProjectStrings.filmImagePath}${company?.logoPath}",
+              fit: BoxFit.contain,
+            )
+          : const Placeholder(),
+    );
+  }
+}
+
+class _TextCompaniesName extends StatelessWidget {
+  const _TextCompaniesName({
+    required this.company,
+  });
+
+  final ProductionCompany? company;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: context.highValue,
+      alignment: Alignment.center,
+      child: Text(
+        company?.name ?? '',
+        style: context.textTheme().labelMedium,
+        textAlign: TextAlign.center,
+        overflow: TextOverflow.ellipsis,
+        maxLines: 2,
+      ),
+    );
+  }
+}
+
+class _GenreChipsFilm extends StatelessWidget {
+  const _GenreChipsFilm({
+    required this.film,
+  });
+
+  final FilmDetailModel film;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: context.paddingVerticalLow2,
+      child: GenreChips(
+        genres: film.genres
+            ?.map(
+              (g) => film_genre.Genre(
+                id: g.id,
+                name: g.name,
+              ),
+            )
+            .toList(),
       ),
     );
   }
