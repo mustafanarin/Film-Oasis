@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:film_oasis/feature/home/model/film_detail_model.dart';
 import 'package:film_oasis/feature/home/model/genre_model.dart' as film_genre;
 import 'package:film_oasis/product/constants/enum/project_radius.dart';
@@ -12,8 +13,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+@RoutePage()
 class DetailPage extends ConsumerStatefulWidget {
-  const DetailPage({super.key});
+  const DetailPage(this.filmId, {super.key});
+  final int filmId;
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _DetailPageState();
 }
@@ -23,7 +26,7 @@ class _DetailPageState extends ConsumerState<DetailPage> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      ref.read(AppProviderItems.filmDetailProvider.notifier).getFilmDetail(726139);
+      ref.read(AppProviderItems.filmDetailProvider.notifier).getFilmDetail(widget.filmId);
     });
   }
 
@@ -349,7 +352,7 @@ class _CompaniesTitleAndCompaniesRow extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: List.generate(
-              4,
+              (film.productionCompanies?.length ?? 0) >= 4 ? 4 : (film.productionCompanies?.length ?? 0),
               (index) {
                 final company = film.productionCompanies?[index];
                 return Expanded(

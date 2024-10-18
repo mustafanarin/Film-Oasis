@@ -1,6 +1,6 @@
-import 'package:film_oasis/product/constants/enum/widget_padding.dart';
 import 'package:film_oasis/product/constants/enum/icon_sizes.dart';
 import 'package:film_oasis/product/constants/enum/project_radius.dart';
+import 'package:film_oasis/product/constants/enum/widget_padding.dart';
 import 'package:film_oasis/product/constants/project_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -42,10 +42,10 @@ abstract final class AppTheme {
           labelMedium: _ProjectTextStyle.labelMedium,
           labelSmall: _ProjectTextStyle.labelSmall,
         ),
-        snackBarTheme: SnackBarThemeData(
+        snackBarTheme: const SnackBarThemeData(
           backgroundColor: ProjectColors.cobaltBlue,
-          actionTextColor: ProjectColors.white
-        )
+          actionTextColor: ProjectColors.white,
+        ),
       );
 }
 

@@ -2,7 +2,7 @@ import 'package:intl/intl.dart';
 
 class FormatNumber {
   static String formatBudgetWithDots(int? budget) {
-    if (budget == null) {
+    if (budget == null || budget == 0) {
       return '-';  
     }
     final formatter = NumberFormat("#,##0", "tr_TR");

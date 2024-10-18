@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:film_oasis/feature/home/model/now_showing_model.dart';
 import 'package:film_oasis/feature/home/model/popular_film_model.dart';
 import 'package:film_oasis/feature/home/state/now_showing_state.dart';
@@ -5,6 +6,7 @@ import 'package:film_oasis/feature/home/state/popular_films_state.dart';
 import 'package:film_oasis/product/constants/project_colors.dart';
 import 'package:film_oasis/product/constants/project_strings.dart';
 import 'package:film_oasis/product/extensions/context_extension.dart';
+import 'package:film_oasis/product/navigate/app_router.gr.dart';
 import 'package:film_oasis/product/provider/app_provider_items.dart';
 import 'package:film_oasis/product/widgets/genre_chips.dart';
 import 'package:film_oasis/product/widgets/project_button.dart';
@@ -12,6 +14,7 @@ import 'package:film_oasis/product/widgets/text_film_imbd.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+@RoutePage()
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
   @override
@@ -32,7 +35,6 @@ class _HomePageState extends ConsumerState<HomePage> {
   Widget build(BuildContext context) {
     final nowShowing = ref.watch(AppProviderItems.nowShowingProvider);
     final popularFilms = ref.watch(AppProviderItems.popularFilmsProvider);
-    
 
     return Scaffold(
       appBar: const _AppbarHomePage(),
@@ -41,9 +43,16 @@ class _HomePageState extends ConsumerState<HomePage> {
           padding: context.paddingAllLow2,
           child: Column(
             children: [
-              _RowTitleAndButton(title: ProjectStrings.showingTitle, onPressed: () {}),
+              _RowTitleAndButton(
+                title: ProjectStrings.showingTitle,
+                onPressed: () => context.pushRoute(SeeMoreRoute(movieList: nowShowing.nowShowingModel.results ?? [])),
+              ),
               _ListViewNowShowing(nowShowing: nowShowing),
-              _RowTitleAndButton(title: ProjectStrings.popularTitle, onPressed: () {}),
+              _RowTitleAndButton(
+                title: ProjectStrings.popularTitle,
+                onPressed: () =>
+                    context.pushRoute(SeeMoreRoute(movieList: popularFilms.popularFilmsModel.results ?? [])),
+              ),
               _PopularFilmsSection(popularFilms: popularFilms),
             ],
           ),
@@ -90,15 +99,20 @@ class _ListViewNowShowing extends StatelessWidget {
                 padding: context.paddingAllLow2,
                 itemBuilder: (context, index) {
                   final film = nowShowing.nowShowingModel.results?[index];
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _ImageNetworkWithContainer(film: film?.posterPath, 
-                      height: context.dynamicHeight(0.25)),
-                      _TextFilmTitle(film: film),
-                      TextFilmIMBd(imbd: film?.voteAverage),
-                      const Spacer(),
-                    ],
+                  return GestureDetector(
+                    onTap: () => context.pushRoute(DetailRoute(filmId: film?.id ?? 1)),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _ImageNetworkWithContainer(
+                          film: film?.posterPath,
+                          height: context.dynamicHeight(0.25),
+                        ),
+                        _TextFilmTitle(film: film),
+                        TextFilmIMBd(imbd: film?.voteAverage),
+                      ],
+                    ),
                   );
                 },
               ),
@@ -154,38 +168,42 @@ class _PopularFilmsSection extends ConsumerWidget {
             final popularFilm = popularFilms.popularFilmsModel.results?[index];
             return Padding(
               padding: context.paddingVerticalLow1,
-              child: Row(
-                children: [
-                  _ImageNetworkWithContainer(
-                    film: popularFilm?.posterPath,
-                    height: context.dynamicHeight(0.19),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        left: context.lowValue2,
-                        bottom: context.lowValue1,
-                      ),
-                      child: SizedBox(
-                        height: context.dynamicHeight(0.19),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            _TextFilmName(popularFilm: popularFilm),
-                            _TextIMBd(popularFilm: popularFilm),
-                            GenreChips.fromIds(
-                              genreIds: popularFilm?.genreIds,
-                              genreModel: genreModel,
-                            ),
-                            _TextFilmRelaseDate(popularFilm: popularFilm),
-                            const SizedBox(height: 1),
-                          ],
+              child: GestureDetector(
+                onTap: () => context.pushRoute(DetailRoute(filmId: popularFilm?.id ?? 0)),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _ImageNetworkWithContainer(
+                      film: popularFilm?.posterPath,
+                      height: context.dynamicHeight(0.19),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          left: context.lowValue2,
+                          bottom: context.lowValue1,
+                        ),
+                        child: SizedBox(
+                          height: context.dynamicHeight(0.19),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              _TextFilmName(popularFilm: popularFilm),
+                              _TextIMBd(popularFilm: popularFilm),
+                              GenreChips.fromIds(
+                                genreIds: popularFilm?.genreIds,
+                                genreModel: genreModel,
+                              ),
+                              _TextFilmRelaseDate(popularFilm: popularFilm),
+                              const SizedBox(height: 1),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             );
           },
@@ -194,7 +212,6 @@ class _PopularFilmsSection extends ConsumerWidget {
     );
   }
 }
-
 
 class _TextFilmName extends StatelessWidget {
   const _TextFilmName({
