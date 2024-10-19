@@ -4,6 +4,7 @@ import 'package:film_oasis/feature/home/model/popular_film_model.dart';
 import 'package:film_oasis/product/constants/project_colors.dart';
 import 'package:film_oasis/product/constants/project_strings.dart';
 import 'package:film_oasis/product/extensions/context_extension.dart';
+import 'package:film_oasis/product/navigate/app_router.gr.dart';
 import 'package:film_oasis/product/widgets/text_film_imbd.dart';
 import 'package:flutter/material.dart';
 
@@ -56,6 +57,7 @@ class _SeeMorePageState extends State<SeeMorePage> {
                 title: filmNow.title,
                 imagePath: filmNow.posterPath,
                 imbd: filmNow.voteAverage,
+                filmId: filmNow.id,
               );
             } else {
               popular = List.from(films);
@@ -64,6 +66,7 @@ class _SeeMorePageState extends State<SeeMorePage> {
                 title: filmPop.title,
                 imagePath: filmPop.posterPath,
                 imbd: filmPop.voteAverage,
+                filmId: filmPop.id,
               );
             }
           },
@@ -78,31 +81,35 @@ class _ColumnFilmItem extends StatelessWidget {
     super.key,
     this.title,
     this.imagePath,
-    this.imbd,
+    this.imbd, 
+    this.filmId,
   });
   final String? title;
   final String? imagePath;
   final double? imbd;
+  final int? filmId;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _ImageFilm(imagePath: imagePath),
-        SizedBox(height: context.lowValue1),
-        _TextFilmTitle(title: title),
-        SizedBox(height: context.dynamicHeight(0.005)),
-        TextFilmIMBd(imbd: imbd),
-      ],
+    return GestureDetector(
+      onTap: () => context.pushRoute(DetailRoute(filmId: filmId ?? 0)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _ImageFilm(imagePath: imagePath),
+          SizedBox(height: context.lowValue1),
+          _TextFilmTitle(title: title),
+          SizedBox(height: context.dynamicHeight(0.005)),
+          TextFilmIMBd(imbd: imbd),
+        ],
+      ),
     );
   }
 }
 
 class _ImageFilm extends StatelessWidget {
   const _ImageFilm({
-    super.key,
-    required this.imagePath,
+    required this.imagePath, super.key,
   });
 
   final String? imagePath;
@@ -139,8 +146,7 @@ class _ImageFilm extends StatelessWidget {
 
 class _TextFilmTitle extends StatelessWidget {
   const _TextFilmTitle({
-    super.key,
-    required this.title,
+    required this.title, super.key,
   });
 
   final String? title;

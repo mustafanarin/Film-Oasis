@@ -15,6 +15,7 @@ dependencies:
 
   # State Managment
   flutter_riverpod: ^2.5.1
+  flutter_hooks: ^0.20.5
 
   # Service
   dio: ^5.7.0
