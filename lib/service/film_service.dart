@@ -5,6 +5,7 @@ import 'package:film_oasis/feature/home/model/film_detail_model.dart';
 import 'package:film_oasis/feature/home/model/genre_model.dart';
 import 'package:film_oasis/feature/home/model/now_showing_model.dart';
 import 'package:film_oasis/feature/home/model/popular_film_model.dart';
+import 'package:film_oasis/feature/search/model/search_model.dart';
 import 'package:film_oasis/product/utility/exception/dio_excepiton.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -13,6 +14,7 @@ abstract class IFilmService {
   Future<PopularFilmModel> getPopularFilms();
   Future<GenreModel> getGenres();
   Future<FilmDetailModel> getFilmDetail(int filmId);
+  Future<SearchModel> searchMovies(String query);
 }
 
 class FilmService implements IFilmService {
@@ -88,6 +90,26 @@ class FilmService implements IFilmService {
     }
   }
 
+  @override
+  Future<SearchModel> searchMovies(String query) async {
+    try {
+      final response = await _dio.get<Map<String, dynamic>>(
+        _FilmApiPath.search.value,
+        queryParameters: {
+          'query': query,
+        },
+      );
+      _checkResponseStatus(response);
+
+      final data = _extractData(response.data);
+      return SearchModel.fromJson(data);
+    } on DioException catch (e) {
+      throw AppDioException('API Error: ${e.message}');
+    } catch (e) {
+      throw AppDioException('An unknown error occurred: $e');
+    }
+  }
+
   void _checkResponseStatus(Response<Map<String, dynamic>> response) {
     if (response.statusCode != HttpStatus.ok) {
       throw AppDioException('Failed to load data', statusCode: response.statusCode);
@@ -107,7 +129,8 @@ enum _FilmApiPath {
   nowPlaying('movie/now_playing'),
   popular('movie/popular'),
   genreMovie('genre/movie/list'),
-  detail('movie');
+  detail('movie'),
+  search('search/movie');
 
   const _FilmApiPath(this.value);
 
