@@ -9,11 +9,11 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i7;
-import 'package:film_oasis/feature/favorite/view/favorites_page.dart' as _i2;
-import 'package:film_oasis/feature/home/view/detail_page.dart' as _i1;
-import 'package:film_oasis/feature/home/view/home_page.dart' as _i3;
-import 'package:film_oasis/feature/home/view/see_more_page.dart' as _i5;
-import 'package:film_oasis/feature/search/view/search_page.dart' as _i4;
+import 'package:film_oasis/feature/favorite/page/favorites_page.dart' as _i2;
+import 'package:film_oasis/feature/home/page/detail_page.dart' as _i1;
+import 'package:film_oasis/feature/home/page/home_page.dart' as _i3;
+import 'package:film_oasis/feature/home/page/see_more_page.dart' as _i5;
+import 'package:film_oasis/feature/search/page/search_page.dart' as _i4;
 import 'package:film_oasis/feature/tabbar/tabbar_page.dart' as _i6;
 import 'package:flutter/material.dart' as _i8;
 

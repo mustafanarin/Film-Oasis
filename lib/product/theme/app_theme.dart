@@ -34,6 +34,21 @@ abstract final class AppTheme {
             elevation: 0,
           ),
         ),
+        snackBarTheme: const SnackBarThemeData(
+          backgroundColor: ProjectColors.cobaltBlue,
+          actionTextColor: ProjectColors.white,
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          // border: OutlineInputBorder(
+          //   borderRadius: BorderRadius.circular(12),
+          // ),
+          suffixIconColor: ProjectColors.cobaltBlue,
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: ProjectColors.cobaltBlue),
+          ),
+          enabledBorder: const OutlineInputBorder(),
+          hintStyle: _ProjectTextStyle.bodyMedium.copyWith(color: ProjectColors.grey),
+        ),
         textTheme: const TextTheme(
           titleMedium: _ProjectTextStyle.titleMediumText,
           bodyLarge: _ProjectTextStyle.bodyLarge,
@@ -41,10 +56,6 @@ abstract final class AppTheme {
           bodySmall: _ProjectTextStyle.bodySmall,
           labelMedium: _ProjectTextStyle.labelMedium,
           labelSmall: _ProjectTextStyle.labelSmall,
-        ),
-        snackBarTheme: const SnackBarThemeData(
-          backgroundColor: ProjectColors.cobaltBlue,
-          actionTextColor: ProjectColors.white,
         ),
       );
 }

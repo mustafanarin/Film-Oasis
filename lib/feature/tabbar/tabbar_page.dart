@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:film_oasis/feature/favorite/view/favorites_page.dart';
-import 'package:film_oasis/feature/home/view/home_page.dart';
-import 'package:film_oasis/feature/search/view/search_page.dart';
+import 'package:film_oasis/feature/favorite/page/favorites_page.dart';
+import 'package:film_oasis/feature/home/page/home_page.dart';
+import 'package:film_oasis/feature/search/page/search_page.dart';
 import 'package:film_oasis/product/constants/project_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';

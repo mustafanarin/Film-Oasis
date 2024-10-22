@@ -21,4 +21,10 @@ abstract final class ProjectStrings {
   static const String budget = 'Budget';
   static const String description = 'Description';
   static const String companies = 'Companies';
+
+  // Search Page
+  static const String appbarSearch = 'Film Search';
+  static const String tfHintText = 'Search films...';
+  static const String noSearchText = 'No results found 🔍';
+  
 }
