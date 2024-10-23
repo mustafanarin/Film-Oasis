@@ -30,6 +30,10 @@ dependencies:
   # Navigate
   auto_route: ^9.2.2
 
+  # Cache
+  cached_network_image: ^3.4.1
+  flutter_cache_manager: ^3.4.1
+
 
 
 dev_dependencies:

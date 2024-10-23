@@ -8,6 +8,7 @@ import 'package:film_oasis/product/constants/project_strings.dart';
 import 'package:film_oasis/product/extensions/context_extension.dart';
 import 'package:film_oasis/product/navigate/app_router.gr.dart';
 import 'package:film_oasis/product/provider/app_provider_items.dart';
+import 'package:film_oasis/product/widgets/cached_network_image.dart';
 import 'package:film_oasis/product/widgets/genre_chips.dart';
 import 'package:film_oasis/product/widgets/project_button.dart';
 import 'package:film_oasis/product/widgets/text_film_imbd.dart';
@@ -105,9 +106,10 @@ class _ListViewNowShowing extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _ImageNetworkWithContainer(
-                          film: film?.posterPath,
+                        ProjectCachedImage(
+                          imageUrl: film?.posterPath,
                           height: context.dynamicHeight(0.25),
+                          width: context.dynamicHeight(0.25) * 2 / 3,
                         ),
                         _TextFilmTitle(film: film),
                         TextFilmIMBd(imbd: film?.voteAverage),
@@ -173,9 +175,10 @@ class _PopularFilmsSection extends ConsumerWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    _ImageNetworkWithContainer(
-                      film: popularFilm?.posterPath,
+                    ProjectCachedImage(
+                      imageUrl: popularFilm?.posterPath,
                       height: context.dynamicHeight(0.19),
+                      width: context.dynamicHeight(0.19) * 2 / 3,
                     ),
                     Expanded(
                       child: Padding(
@@ -259,50 +262,6 @@ class _TextFilmRelaseDate extends StatelessWidget {
     return Text(
       popularFilm?.releaseDate ?? '',
       style: context.textTheme().bodySmall,
-    );
-  }
-}
-
-class _ImageNetworkWithContainer extends StatelessWidget {
-  const _ImageNetworkWithContainer({
-    required this.film,
-    required this.height,
-  });
-
-  final String? film;
-  final double height;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.3),
-            spreadRadius: 3,
-            blurRadius: 10,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(5),
-        child: film != null
-            ? Image.network(
-                height: height,
-                width: height * 2 / 3,
-                '${ProjectStrings.filmImagePath}$film',
-                errorBuilder: (context, error, stackTrace) => const Icon(Icons.error),
-                fit: BoxFit.cover,
-              )
-            : SizedBox(
-                height: height,
-                width: height * 2 / 3,
-                child: const Placeholder(
-                  color: ProjectColors.grey,
-                ),
-              ),
-      ),
     );
   }
 }

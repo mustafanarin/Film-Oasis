@@ -5,6 +5,8 @@ import 'package:film_oasis/feature/home/provider/popular_films_provider.dart';
 import 'package:film_oasis/feature/home/state/film_detail_state.dart';
 import 'package:film_oasis/feature/home/state/now_showing_state.dart';
 import 'package:film_oasis/feature/home/state/popular_films_state.dart';
+import 'package:film_oasis/feature/search/provider/search_provider.dart';
+import 'package:film_oasis/feature/search/state/search_state.dart';
 import 'package:film_oasis/service/film_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -27,4 +29,8 @@ final class AppProviderItems {
   static final filmDetailProvider = AutoDisposeNotifierProvider<FilmDetailNotifier, FilmDetailState>(() {
     return FilmDetailNotifier();
   });
+
+  static final searchProvider = AutoDisposeNotifierProvider<SearchNotifier, SearchState>(
+  () => SearchNotifier(),
+);
 }

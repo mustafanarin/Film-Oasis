@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:film_oasis/feature/home/model/now_showing_model.dart';
 import 'package:film_oasis/feature/home/model/popular_film_model.dart';
-import 'package:film_oasis/product/constants/project_colors.dart';
 import 'package:film_oasis/product/constants/project_strings.dart';
 import 'package:film_oasis/product/extensions/context_extension.dart';
 import 'package:film_oasis/product/navigate/app_router.gr.dart';
+import 'package:film_oasis/product/widgets/cached_network_image.dart';
 import 'package:film_oasis/product/widgets/text_film_imbd.dart';
 import 'package:flutter/material.dart';
 
@@ -46,7 +46,6 @@ class _SeeMorePageState extends State<SeeMorePage> {
             crossAxisCount: 2,
             childAspectRatio: 2 / 3.7,
             crossAxisSpacing: 15,
-            
           ),
           itemCount: films.length,
           itemBuilder: (context, index) {
@@ -81,7 +80,7 @@ class _ColumnFilmItem extends StatelessWidget {
     super.key,
     this.title,
     this.imagePath,
-    this.imbd, 
+    this.imbd,
     this.filmId,
   });
   final String? title;
@@ -109,44 +108,26 @@ class _ColumnFilmItem extends StatelessWidget {
 
 class _ImageFilm extends StatelessWidget {
   const _ImageFilm({
-    required this.imagePath, super.key,
+    required this.imagePath,
+    super.key,
   });
 
   final String? imagePath;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return ProjectCachedImage(
+      imageUrl: imagePath,
       height: context.dynamicHeight(0.3125),
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.3),
-            spreadRadius: 3,
-            blurRadius: 10,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(5),
-        child: imagePath != null
-            ? Image.network(
-                '${ProjectStrings.filmImagePath}$imagePath',
-                errorBuilder: (context, error, stackTrace) => const Icon(Icons.error),
-                fit: BoxFit.cover,
-              )
-            : const Placeholder(
-                color: ProjectColors.grey,
-              ),
-      ),
+      width: double.infinity,
     );
   }
 }
 
 class _TextFilmTitle extends StatelessWidget {
   const _TextFilmTitle({
-    required this.title, super.key,
+    required this.title,
+    super.key,
   });
 
   final String? title;

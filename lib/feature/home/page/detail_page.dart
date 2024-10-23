@@ -7,6 +7,7 @@ import 'package:film_oasis/product/constants/project_strings.dart';
 import 'package:film_oasis/product/core/format_number.dart';
 import 'package:film_oasis/product/extensions/context_extension.dart';
 import 'package:film_oasis/product/provider/app_provider_items.dart';
+import 'package:film_oasis/product/widgets/cached_network_image.dart';
 import 'package:film_oasis/product/widgets/genre_chips.dart';
 import 'package:film_oasis/product/widgets/text_film_imbd.dart';
 import 'package:flutter/material.dart';
@@ -131,15 +132,12 @@ class _BackdropImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        SizedBox(
+        ProjectCachedImage(
+          imageUrl: film.backdropPath,
           height: context.dynamicHeight(0.32),
           width: context.dynamicWidth(1),
-          child: film.backdropPath != null
-              ? Image.network(
-                  "${ProjectStrings.filmImagePath}${film.backdropPath}",
-                  fit: BoxFit.cover,
-                )
-              : const Placeholder(),
+          withShadow: false,
+          isBackdrop: true,
         ),
         Positioned(
           top: context.dynamicHeight(0.13),
@@ -391,12 +389,11 @@ class _ImageCompanies extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       flex: 2,
-      child: company?.logoPath != null
-          ? Image.network(
-              "${ProjectStrings.filmImagePath}${company?.logoPath}",
-              fit: BoxFit.contain,
-            )
-          : const Placeholder(),
+      child: ProjectCachedImage(
+        imageUrl: company?.logoPath,
+        fit: BoxFit.contain,
+        withShadow: false,
+      ),
     );
   }
 }

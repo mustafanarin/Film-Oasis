@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:film_oasis/feature/search/model/search_model.dart';
-import 'package:film_oasis/feature/search/provider/search_provider.dart';
 import 'package:film_oasis/feature/search/state/search_state.dart';
 import 'package:film_oasis/product/constants/enum/project_elevation.dart';
 import 'package:film_oasis/product/constants/project_colors.dart';
 import 'package:film_oasis/product/constants/project_strings.dart';
 import 'package:film_oasis/product/extensions/context_extension.dart';
 import 'package:film_oasis/product/navigate/app_router.gr.dart';
+import 'package:film_oasis/product/provider/app_provider_items.dart';
 import 'package:film_oasis/product/widgets/project_textfield.dart';
 import 'package:film_oasis/product/widgets/text_film_imbd.dart';
 import 'package:flutter/material.dart';
@@ -44,16 +44,16 @@ class _SearchPageState extends ConsumerState<SearchPage> {
 
     _debounceTimer = Timer(const Duration(milliseconds: 500), () {
       if (query.isNotEmpty) {
-        ref.watch(searchProvider.notifier).searchMovies(query);
+        ref.watch(AppProviderItems.searchProvider.notifier).searchMovies(query);
       } else {
-        ref.watch(searchProvider.notifier).clearSearch();
+        ref.watch(AppProviderItems.searchProvider.notifier).clearSearch();
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(searchProvider);
+    final state = ref.watch(AppProviderItems.searchProvider);
 
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
@@ -70,7 +70,7 @@ class _SearchPageState extends ConsumerState<SearchPage> {
                 onChanged: _onSearchChanged,
                 onClearPressed: () {
                   _searchController.clear();
-                  ref.read(searchProvider.notifier).clearSearch();
+                  ref.read(AppProviderItems.searchProvider.notifier).clearSearch();
                 },
               ),
               if (state.isLoading)
