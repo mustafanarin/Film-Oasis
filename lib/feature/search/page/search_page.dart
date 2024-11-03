@@ -10,6 +10,7 @@ import 'package:film_oasis/product/extensions/context_extension.dart';
 import 'package:film_oasis/product/navigate/app_router.gr.dart';
 import 'package:film_oasis/product/provider/app_provider_items.dart';
 import 'package:film_oasis/product/widgets/project_textfield.dart';
+import 'package:film_oasis/product/widgets/release_date_text.dart';
 import 'package:film_oasis/product/widgets/text_film_imbd.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -175,10 +176,7 @@ class _FilmDateAndImbd extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            movie.releaseDate ?? '-',
-            style: context.textTheme().bodySmall,
-          ),
+          ReleaseDateText(releaseDate: movie.releaseDate),
           TextFilmIMBd(imbd: movie.voteAverage ?? 0),
         ],
       ),

@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:film_oasis/product/constants/enum/project_radius.dart';
 import 'package:film_oasis/product/constants/project_colors.dart';
 import 'package:film_oasis/product/constants/project_strings.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +47,7 @@ class ProjectCachedImage extends StatelessWidget {
 
     final finalImageUrl = '${ProjectStrings.filmImagePath}$imageUrl';
     final imageWidget = ClipRRect(
-      borderRadius: borderRadius ?? BorderRadius.circular(5),
+      borderRadius: borderRadius ?? BorderRadius.circular(ProjectRadius.xSmall.value),
       child: CachedNetworkImage(
         imageUrl: finalImageUrl,
         height: height,
@@ -69,7 +70,7 @@ class ProjectCachedImage extends StatelessWidget {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.3),
+            color: ProjectColors.black.withOpacity(0.3),
             spreadRadius: 3,
             blurRadius: 10,
             offset: const Offset(0, 3),

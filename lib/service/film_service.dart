@@ -117,7 +117,7 @@ class FilmService implements IFilmService {
   }
 
   Map<String, dynamic> _extractData(Map<String, dynamic>? data, {bool isResultsRequired = true}) {
-    if (data != null && (!isResultsRequired || data.containsKey('results'))) {
+    if (data != null && (!isResultsRequired || data.containsKey(_FilmApiPath.results.value))) {
       return data;
     } else {
       throw AppDioException('Error: Data not available!');
@@ -130,7 +130,8 @@ enum _FilmApiPath {
   popular('movie/popular'),
   genreMovie('genre/movie/list'),
   detail('movie'),
-  search('search/movie');
+  search('search/movie'),
+  results('results');
 
   const _FilmApiPath(this.value);
 

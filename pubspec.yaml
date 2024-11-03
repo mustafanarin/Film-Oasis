@@ -33,17 +33,18 @@ dependencies:
   # Cache
   cached_network_image: ^3.4.1
   flutter_cache_manager: ^3.4.1
-
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-
   very_good_analysis: ^6.0.0
   auto_route_generator: ^9.0.0
   build_runner: ^2.4.13
+  hive_generator: ^2.0.1
   flutter_lints: ^4.0.0
 
 flutter:

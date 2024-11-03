@@ -9,6 +9,7 @@ import 'package:film_oasis/product/extensions/context_extension.dart';
 import 'package:film_oasis/product/provider/app_provider_items.dart';
 import 'package:film_oasis/product/widgets/cached_network_image.dart';
 import 'package:film_oasis/product/widgets/genre_chips.dart';
+import 'package:film_oasis/product/widgets/release_date_text.dart';
 import 'package:film_oasis/product/widgets/text_film_imbd.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -79,42 +80,87 @@ class _DetailPageState extends ConsumerState<DetailPage> {
                   children: [
                     SizedBox(height: context.dynamicHeight(0.3)),
                     Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: ProjectColors.white,
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(ProjectRadius.small.value),
-                          ),
-                        ),
-                        child: Padding(
-                          padding: context.paddingAllLow2,
-                          child: Column(
-                            children: [
-                              Expanded(
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      _TextFilmTitle(film: film),
-                                      _TextIMDb(film: film),
-                                      _GenreChipsFilm(film: film),
-                                      _RowFilmInfos(film: film),
-                                      const _TextDescriptonTitle(),
-                                      _TextDescription(film: film),
-                                    ],
+                      child: Stack(
+                        children: [
+                          Container(
+                            decoration: _topRadiusDecoration(),
+                            child: Padding(
+                              padding: context.paddingAllLow2,
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    child: SingleChildScrollView(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          _TextFilmTitle(film: film),
+                                          _TextTagline(tagline: film.tagline),
+                                          _TextIMDbAndPopularity(film: film),
+                                          _GenreChipsFilm(film: film),
+                                          _RowFilmInfos(film: film),
+                                          const _TextDescriptonTitle(),
+                                          _TextDescription(film: film),
+                                        ],
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                  _CompaniesTitleAndCompaniesRow(film: film),
+                                ],
                               ),
-                              _CompaniesTitleAndCompaniesRow(film: film),
-                            ],
+                            ),
                           ),
-                        ),
+                          Positioned(
+                            right: context.lowValue1,
+                            top: context.lowValue1,
+                            child: Padding(
+                              padding: context.paddingAllLow2,
+                              child: const Icon(
+                                Icons.bookmark_outline,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
               ],
             ),
+    );
+  }
+
+  BoxDecoration _topRadiusDecoration() {
+    return BoxDecoration(
+      color: ProjectColors.white,
+      borderRadius: BorderRadius.vertical(
+        top: Radius.circular(ProjectRadius.small.value),
+      ),
+    );
+  }
+}
+
+class _TextTagline extends StatelessWidget {
+  const _TextTagline({
+    required this.tagline,
+  });
+
+  final String? tagline;
+
+  @override
+  Widget build(BuildContext context) {
+    if (tagline == null || tagline!.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    return Padding(
+      padding: EdgeInsets.only(bottom: context.lowValue1),
+      child: Text(
+        '"$tagline"',
+        style: context.textTheme().bodyMedium?.copyWith(
+              fontStyle: FontStyle.italic,
+              color: ProjectColors.grey,
+            ),
+      ),
     );
   }
 }
@@ -190,15 +236,18 @@ class _TextFilmTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      film.title ?? '',
-      style: context.textTheme().titleMedium,
+    return SizedBox(
+      width: context.dynamicWidth(0.8),
+      child: Text(
+        film.title ?? '',
+        style: context.textTheme().titleMedium,
+      ),
     );
   }
 }
 
-class _TextIMDb extends StatelessWidget {
-  const _TextIMDb({
+class _TextIMDbAndPopularity extends StatelessWidget {
+  const _TextIMDbAndPopularity({
     required this.film,
   });
 
@@ -210,8 +259,26 @@ class _TextIMDb extends StatelessWidget {
       padding: EdgeInsets.only(
         top: context.lowValue1,
       ),
-      child: TextFilmIMBd(
-        imbd: film.voteAverage,
+      child: Row(
+        children: [
+          TextFilmIMBd(
+            imbd: film.voteAverage,
+          ),
+          const Spacer(),
+          if (film.popularity != null) ...[
+            Icon(Icons.trending_up, size: context.lowValue2),
+            SizedBox(width: context.lowValue1),
+            Text(
+              film.popularity!.toStringAsFixed(1),
+              style: context.textTheme().bodySmall,
+            ),
+          ],
+          const Spacer(),
+          ReleaseDateText(releaseDate: film.releaseDate),
+          const Spacer(
+            flex: 8,
+          ),
+        ],
       ),
     );
   }

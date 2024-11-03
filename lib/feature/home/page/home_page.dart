@@ -11,6 +11,7 @@ import 'package:film_oasis/product/provider/app_provider_items.dart';
 import 'package:film_oasis/product/widgets/cached_network_image.dart';
 import 'package:film_oasis/product/widgets/genre_chips.dart';
 import 'package:film_oasis/product/widgets/project_button.dart';
+import 'package:film_oasis/product/widgets/release_date_text.dart';
 import 'package:film_oasis/product/widgets/text_film_imbd.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -198,8 +199,8 @@ class _PopularFilmsSection extends ConsumerWidget {
                                 genreIds: popularFilm?.genreIds,
                                 genreModel: genreModel,
                               ),
-                              _TextFilmRelaseDate(popularFilm: popularFilm),
-                              const SizedBox(height: 1),
+                              ReleaseDateText(releaseDate: popularFilm?.releaseDate),
+                              SizedBox(height: 1,)
                             ],
                           ),
                         ),
@@ -215,6 +216,7 @@ class _PopularFilmsSection extends ConsumerWidget {
     );
   }
 }
+
 
 class _TextFilmName extends StatelessWidget {
   const _TextFilmName({
@@ -250,21 +252,7 @@ class _TextIMBd extends StatelessWidget {
   }
 }
 
-class _TextFilmRelaseDate extends StatelessWidget {
-  const _TextFilmRelaseDate({
-    required this.popularFilm,
-  });
 
-  final MovieResult? popularFilm;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      popularFilm?.releaseDate ?? '',
-      style: context.textTheme().bodySmall,
-    );
-  }
-}
 
 class _RowTitleAndButton extends StatelessWidget {
   const _RowTitleAndButton({
