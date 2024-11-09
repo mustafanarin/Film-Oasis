@@ -1,4 +1,9 @@
-final class FilmDetailModel {
+import 'package:hive/hive.dart';
+
+part 'film_detail_model.g.dart';
+
+@HiveType(typeId: 0)
+final class FilmDetailModel extends HiveObject {
   FilmDetailModel({
     this.backdropPath,
     this.budget,
@@ -6,18 +11,14 @@ final class FilmDetailModel {
     this.homepage,
     this.id,
     this.originCountry,
-    this.originalTitle,
     this.overview,
     this.popularity,
     this.posterPath,
     this.productionCompanies,
-    this.productionCountries,
     this.releaseDate,
     this.spokenLanguages,
-    this.status,
     this.tagline,
     this.title,
-    this.video,
     this.voteAverage,
   });
 
@@ -25,55 +26,73 @@ final class FilmDetailModel {
     return FilmDetailModel(
       backdropPath: json['backdrop_path'] as String?,
       budget: json['budget'] as int?,
-      genres: (json['genres'] as List<dynamic>?)
-          ?.map((e) => Genre.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      genres: (json['genres'] as List<dynamic>?)?.map((e) => Genre.fromJson(
+        e as Map<String, dynamic>,),).toList(),
       homepage: json['homepage'] as String?,
       id: json['id'] as int?,
       originCountry: (json['origin_country'] as List<dynamic>?)?.cast<String>(),
-      originalTitle: json['original_title'] as String?,
       overview: json['overview'] as String?,
       popularity: (json['popularity'] as num?)?.toDouble(),
       posterPath: json['poster_path'] as String?,
       productionCompanies: (json['production_companies'] as List<dynamic>?)
           ?.map((e) => ProductionCompany.fromJson(e as Map<String, dynamic>))
           .toList(),
-      productionCountries: (json['production_countries'] as List<dynamic>?)
-          ?.map((e) => ProductionCountry.fromJson(e as Map<String, dynamic>))
-          .toList(),
       releaseDate: json['release_date'] as String?,
       spokenLanguages: (json['spoken_languages'] as List<dynamic>?)
           ?.map((e) => SpokenLanguage.fromJson(e as Map<String, dynamic>))
           .toList(),
-      status: json['status'] as String?,
       tagline: json['tagline'] as String?,
       title: json['title'] as String?,
-      video: json['video'] as bool?,
       voteAverage: (json['vote_average'] as num?)?.toDouble(),
     );
   }
-
+  @HiveField(0)
   final String? backdropPath;
+
+  @HiveField(1)
   final int? budget;
+
+  @HiveField(2)
   final List<Genre>? genres;
+
+  @HiveField(3)
   final String? homepage;
+
+  @HiveField(4)
   final int? id;
+
+  @HiveField(5)
   final List<String>? originCountry;
-  final String? originalTitle;
+
+  @HiveField(6)
   final String? overview;
+
+  @HiveField(7)
   final double? popularity;
+
+  @HiveField(8)
   final String? posterPath;
+
+  @HiveField(9)
   final List<ProductionCompany>? productionCompanies;
-  final List<ProductionCountry>? productionCountries;
+
+  @HiveField(10)
   final String? releaseDate;
+
+  @HiveField(11)
   final List<SpokenLanguage>? spokenLanguages;
-  final String? status;
+
+  @HiveField(12)
   final String? tagline;
+
+  @HiveField(13)
   final String? title;
-  final bool? video;
+
+  @HiveField(14)
   final double? voteAverage;
 }
 
+@HiveType(typeId: 1)
 final class Genre {
   Genre({
     this.id,
@@ -86,67 +105,44 @@ final class Genre {
       name: json['name'] as String?,
     );
   }
-
+  @HiveField(0)
   final int? id;
+
+  @HiveField(1)
   final String? name;
 }
 
+@HiveType(typeId: 2)
 final class ProductionCompany {
   ProductionCompany({
-    this.id,
     this.logoPath,
     this.name,
-    this.originCountry,
   });
 
   factory ProductionCompany.fromJson(Map<String, dynamic> json) {
     return ProductionCompany(
-      id: json['id'] as int?,
       logoPath: json['logo_path'] as String?,
       name: json['name'] as String?,
-      originCountry: json['origin_country'] as String?,
     );
   }
-
-  final int? id;
+  @HiveField(0)
   final String? logoPath;
-  final String? name;
-  final String? originCountry;
-}
 
-final class ProductionCountry {
-  ProductionCountry({
-    this.iso31661,
-    this.name,
-  });
-
-  factory ProductionCountry.fromJson(Map<String, dynamic> json) {
-    return ProductionCountry(
-      iso31661: json['iso_3166_1'] as String?,
-      name: json['name'] as String?,
-    );
-  }
-
-  final String? iso31661;
+  @HiveField(1)
   final String? name;
 }
 
+@HiveType(typeId: 3)
 final class SpokenLanguage {
   SpokenLanguage({
     this.englishName,
-    this.iso6391,
-    this.name,
   });
 
   factory SpokenLanguage.fromJson(Map<String, dynamic> json) {
     return SpokenLanguage(
       englishName: json['english_name'] as String?,
-      iso6391: json['iso_639_1'] as String?,
-      name: json['name'] as String?,
     );
   }
-
+  @HiveField(0)
   final String? englishName;
-  final String? iso6391;
-  final String? name;
 }

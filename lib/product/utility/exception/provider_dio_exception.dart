@@ -1,5 +1,5 @@
-class AppProviderException implements Exception {
-  AppProviderException({
+class AppProviderDioException implements Exception {
+  AppProviderDioException({
     required this.message,
   });
 

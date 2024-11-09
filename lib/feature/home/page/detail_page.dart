@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:film_oasis/feature/favorite/provider/favorite_provider.dart';
 import 'package:film_oasis/feature/home/model/film_detail_model.dart';
 import 'package:film_oasis/feature/home/model/genre_model.dart' as film_genre;
 import 'package:film_oasis/product/constants/enum/project_radius.dart';
@@ -114,8 +115,22 @@ class _DetailPageState extends ConsumerState<DetailPage> {
                             top: context.lowValue1,
                             child: Padding(
                               padding: context.paddingAllLow2,
-                              child: const Icon(
-                                Icons.bookmark_outline,
+                              child: Consumer(
+                                builder: (context, ref, child) {
+                                  final isFavorite = ref.watch(favoriteProvider).model?.any(
+                                            (f) => f.id == film.id,
+                                          ) ??
+                                      false;
+                                  return IconButton(
+                                    onPressed: () {
+                                      ref.read(favoriteProvider.notifier).toggleFavorite(film);
+                                    },
+                                    icon: Icon(
+                                      isFavorite ? Icons.bookmark : Icons.bookmark_outline,
+                                      color: isFavorite ? Colors.red : null,
+                                    ),
+                                  );
+                                },
                               ),
                             ),
                           ),
