@@ -1,4 +1,5 @@
 enum IconSizes {
+  small(16),
   normal(25),
   large(30);
 

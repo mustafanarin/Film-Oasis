@@ -21,14 +21,14 @@ class ReleaseDateText extends StatelessWidget {
         Icon(Icons.calendar_today, size: context.lowValue2),
         SizedBox(width: context.lowValue1),
         Text(
-          _formatDate(releaseDate!),
+          _formatDayMonthYearDate(releaseDate!),
           style: context.textTheme().bodySmall,
         ),
       ],
     );
   }
 
-  String _formatDate(String date) {
+  String _formatDayMonthYearDate(String date) {
     try {
       return DateFormat('dd MMM yyyy').format(DateTime.parse(date));
     } catch (e) {
