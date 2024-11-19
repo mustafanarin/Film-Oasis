@@ -7,7 +7,7 @@ import 'package:film_oasis/product/utility/exception/provider_dio_exception.dart
 import 'package:film_oasis/service/film_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SearchNotifier extends AutoDisposeNotifier<SearchState> {
+final class SearchNotifier extends AutoDisposeNotifier<SearchState> {
   late final IFilmService _service;
 
   @override
