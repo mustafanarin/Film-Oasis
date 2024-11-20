@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:film_oasis/feature/favorite/page/favorites_page.dart';
-import 'package:film_oasis/feature/home/page/home_page.dart';
+import 'package:film_oasis/feature/home/page/home/home_page.dart';
 import 'package:film_oasis/feature/search/page/search_page.dart';
 import 'package:film_oasis/product/constants/project_colors.dart';
 import 'package:flutter/material.dart';

@@ -1,6 +1,6 @@
 import 'package:film_oasis/feature/home/model/film_detail_model.dart';
 
-class FilmDetailState {
+final class FilmDetailState {
   FilmDetailState({required this.filmDetailModel, required this.isLoading});
 
 
