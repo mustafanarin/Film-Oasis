@@ -14,7 +14,7 @@ class ProjectCachedImage extends StatelessWidget {
     this.fit = BoxFit.cover,
     this.borderRadius,
     this.withShadow = true,
-    this.isBackdrop = false,
+    this.isBackdrop = false, this.color,
   });
 
   final String? imageUrl;
@@ -24,6 +24,7 @@ class ProjectCachedImage extends StatelessWidget {
   final BorderRadius? borderRadius;
   final bool withShadow;
   final bool isBackdrop;
+  final Color? color;
 
   static final customCacheManager = CacheManager(
     Config(
@@ -49,6 +50,7 @@ class ProjectCachedImage extends StatelessWidget {
     final imageWidget = ClipRRect(
       borderRadius: borderRadius ?? BorderRadius.circular(ProjectRadius.xSmall.value),
       child: CachedNetworkImage(
+        color: color,
         imageUrl: finalImageUrl,
         height: height,
         width: width,

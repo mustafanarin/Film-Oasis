@@ -11,4 +11,10 @@ abstract final class ProjectColors {
   static const Color cobaltBlue = Color(0xff88A4E8);
   static const Color grey600 = Color(0xFF757575);
   static const Color greyText = Color(0xff9C9C9C);
+
+  // Dark theme colors
+  static const Color darkBackground = Color(0xFF121212);
+  static const Color darkSurface = Color(0xFF1E1E1E);
+  static const Color darkTextColor = Colors.white;
+  static const Color darkGreyText = Color(0xFFBDBDBD);
 }

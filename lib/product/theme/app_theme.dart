@@ -17,6 +17,15 @@ abstract final class AppTheme {
           ),
         ),
         scaffoldBackgroundColor: ProjectColors.white,
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          backgroundColor: ProjectColors.white,
+          selectedItemColor: ProjectColors.black,
+          unselectedItemColor: ProjectColors.grey,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          type: BottomNavigationBarType.fixed,
+          elevation: 8,
+        ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: ProjectColors.white,
@@ -55,6 +64,83 @@ abstract final class AppTheme {
           bodyMedium: _ProjectTextStyle.bodyMedium,
           bodySmall: _ProjectTextStyle.bodySmall,
           labelMedium: _ProjectTextStyle.labelMedium,
+          labelSmall: _ProjectTextStyle.labelSmall,
+        ),
+      );
+
+  static ThemeData get getDarkTheme => ThemeData.dark().copyWith(
+        appBarTheme: AppBarTheme(
+          centerTitle: true,
+          titleTextStyle: _ProjectTextStyle.bodyLarge.copyWith(
+            color: ProjectColors.darkTextColor,
+          ),
+          elevation: 0,
+          scrolledUnderElevation: 0,
+          backgroundColor: ProjectColors.darkBackground,
+          iconTheme: IconThemeData(
+            size: IconSizes.normal.value,
+            color: ProjectColors.darkTextColor,
+          ),
+        ),
+        scaffoldBackgroundColor: ProjectColors.darkBackground,
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: ProjectColors.darkBackground,
+          selectedItemColor: ProjectColors.cobaltBlue,
+          unselectedItemColor: ProjectColors.white.withOpacity(0.6),
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          type: BottomNavigationBarType.fixed,
+          elevation: 8,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: ProjectColors.darkSurface,
+            foregroundColor: ProjectColors.darkTextColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(ProjectRadius.large.value),
+              ),
+              side: BorderSide(color: ProjectColors.grey.withOpacity(0.50)),
+            ),
+            padding: EdgeInsets.symmetric(
+              horizontal: WidgetPadding.normal.value,
+              vertical: WidgetPadding.zero.value,
+            ),
+            elevation: 0,
+          ),
+        ),
+        snackBarTheme: const SnackBarThemeData(
+          backgroundColor: ProjectColors.cobaltBlue,
+          actionTextColor: ProjectColors.darkTextColor,
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          suffixIconColor: ProjectColors.cobaltBlue,
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: ProjectColors.cobaltBlue),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: ProjectColors.grey.withOpacity(0.3)),
+          ),
+          hintStyle: _ProjectTextStyle.bodyMedium.copyWith(
+            color: ProjectColors.darkGreyText,
+          ),
+        ),
+        textTheme: TextTheme(
+          titleMedium: _ProjectTextStyle.titleMediumText.copyWith(
+            color: ProjectColors.darkTextColor,
+          ),
+          bodyLarge: _ProjectTextStyle.bodyLarge.copyWith(
+            color: ProjectColors.darkTextColor,
+          ),
+          bodyMedium: _ProjectTextStyle.bodyMedium.copyWith(
+            color: ProjectColors.darkTextColor,
+          ),
+          bodySmall: _ProjectTextStyle.bodySmall.copyWith(
+            color: ProjectColors.darkGreyText,
+          ),
+          labelMedium: _ProjectTextStyle.labelMedium.copyWith(
+            color: ProjectColors.darkTextColor,
+          ),
           labelSmall: _ProjectTextStyle.labelSmall,
         ),
       );

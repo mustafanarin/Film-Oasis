@@ -63,12 +63,14 @@ class _ImageCompanies extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Expanded(
       flex: 2,
       child: ProjectCachedImage(
         imageUrl: company?.logoPath,
         fit: BoxFit.contain,
         withShadow: false,
+        color: isDarkMode ? ProjectColors.white : null,
       ),
     );
   }

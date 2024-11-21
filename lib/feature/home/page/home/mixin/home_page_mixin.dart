@@ -11,6 +11,9 @@ mixin HomePageMixin on ConsumerState<HomePage> {
   NowShowingState get nowShowingState => ref.watch(AppProviderItems.nowShowingProvider);
   PopularFilmsState get popularFilmsState => ref.watch(AppProviderItems.popularFilmsProvider);
 
+  bool get wantKeepAlive => true;
+
+
   @override
   void initState() {
     super.initState();

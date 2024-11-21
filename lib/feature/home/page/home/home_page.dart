@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:film_oasis/feature/home/model/now_showing_model.dart';
 import 'package:film_oasis/feature/home/model/popular_film_model.dart';
 import 'package:film_oasis/feature/home/page/home/mixin/home_page_mixin.dart';
+import 'package:film_oasis/feature/home/provider/theme_provider.dart';
 import 'package:film_oasis/feature/home/state/now_showing_state.dart';
 import 'package:film_oasis/feature/home/state/popular_films_state.dart';
 import 'package:film_oasis/product/constants/project_colors.dart';
@@ -29,9 +30,12 @@ final class HomePage extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _HomePageState();
 }
 
-class _HomePageState extends ConsumerState<HomePage> with HomePageMixin {
+class _HomePageState extends ConsumerState<HomePage> with HomePageMixin, AutomaticKeepAliveClientMixin {
+
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+    
     final nowShowing = nowShowingState;
     final popularFilms = popularFilmsState;
 
@@ -59,4 +63,3 @@ class _HomePageState extends ConsumerState<HomePage> with HomePageMixin {
     );
   }
 }
-

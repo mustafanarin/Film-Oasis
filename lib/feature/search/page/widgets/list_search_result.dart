@@ -1,4 +1,5 @@
 part of '../search_page.dart';
+
 final class _ListViewSearchResult extends StatelessWidget {
   const _ListViewSearchResult({
     required this.state,
@@ -29,10 +30,13 @@ class _CardFilmItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Padding(
       padding: EdgeInsets.only(bottom: context.lowValue1),
       child: Card(
-        color: ProjectColors.white,
+        color: isDarkMode 
+    ? Color.lerp(ProjectColors.darkSurface, ProjectColors.cobaltBlue, 0.05) 
+    : Theme.of(context).scaffoldBackgroundColor,
         elevation: ProjectElevation.small.value,
         child: ListTile(
           contentPadding: context.paddingAllLow1,

@@ -33,7 +33,7 @@ class _FavoritesPageState extends ConsumerState<FavoritesPage> with SingleTicker
     final filteredFavorites = filterFavorites(favorites);
 
     return Scaffold(
-      backgroundColor: ProjectColors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: _FavoritesAppBar(
         isSearching: isSearching,
         onSearchToggle: toggleSearch,

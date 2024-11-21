@@ -2,7 +2,6 @@ import 'package:film_oasis/feature/favorite/provider/favorite_provider.dart';
 import 'package:film_oasis/feature/home/model/film_detail_model.dart';
 import 'package:film_oasis/feature/home/page/detail/detail_page.dart';
 import 'package:film_oasis/product/constants/enum/project_radius.dart';
-import 'package:film_oasis/product/constants/project_colors.dart';
 import 'package:film_oasis/product/constants/project_strings.dart';
 import 'package:film_oasis/product/provider/app_provider_items.dart';
 import 'package:flutter/material.dart';
@@ -67,7 +66,7 @@ mixin DetailPageMixin on ConsumerState<DetailPage> {
 
   BoxDecoration topRadiusDecoration() {
     return BoxDecoration(
-      color: ProjectColors.white,
+      color: Theme.of(context).scaffoldBackgroundColor,
       borderRadius: BorderRadius.vertical(
         top: Radius.circular(ProjectRadius.small.value),
       ),
