@@ -1,0 +1,39 @@
+{
+    "projectName": "Film Oasis",
+    "home": {
+      "showing_title": "Gösterimdekiler",
+      "popular_title": "Popüler",
+      "imdb_text": "/10 IMDb",
+      "button_name": "Daha fazla",
+      "error_genres": "Türler yüklenirken hata oluştu",
+      "theme_dark_text": "Karanlık Tema",
+      "language_text": "Türkçe",
+      "ok_text": "Tamam",
+      "settings": "Ayarlar"
+    },
+    "detail": {
+      "snackbar_link_error": "Bir hata oluştu, lütfen daha sonra tekrar deneyin.",
+      "snackbar_action_text": "Kapat",
+      "country": "Ülke",
+      "language": "Dil",
+      "budget": "Bütçe",
+      "description": "Açıklama",
+      "companies": "Şirketler"
+    },
+    "search": {
+      "appbar_search": "Film Ara",
+      "tf_hint_text": "Film ara...",
+      "search_film_text": "İstediğin filmi şimdi bul 🔍"
+    },
+    "favorites": {
+      "favorite_text": "Favoriler",
+      "no_found_film": "Arama kriterlerinize uygun film bulunamadı",
+      "no_favorite_film": "Henüz favori film eklemediniz",
+      "clean_search": "Aramayı Temizle",
+      "for_results": "için sonuçlar"
+    },
+    "constants": {
+      "film_image_path": "https://image.tmdb.org/t/p/w500",
+      "film_image_error_path": "https://via.placeholder.com/150"
+    }
+  }

@@ -61,7 +61,7 @@ class _TextFilmTitle extends StatelessWidget {
     return Text(
       title ?? '',
       style: context.textTheme().bodyMedium,
-      maxLines: 2,
+      maxLines: 1,
       overflow: TextOverflow.ellipsis,
     );
   }

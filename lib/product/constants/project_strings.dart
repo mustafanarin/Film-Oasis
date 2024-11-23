@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart' show immutable;
 
 @immutable
@@ -5,37 +6,36 @@ abstract final class ProjectStrings {
   static const String projectName = 'Film Oasis';
 
   // Home Page
-  static const String showingTitle = 'Now showing';
-  static const String popularTitle = 'Popular';
-  static const String imbdText = '/10 IMDb';
-  static const String buttonName = 'See more';
-  static const String errorGenres = 'Error loading genres';
-  static const String filmImagePath = 'https://image.tmdb.org/t/p/w500';
-  static const String filmImageErrorPath = 'https://via.placeholder.com/150';
-  static const String themeDarkText = 'Dark Theme';
-  static const String languageText = 'English';
-  static const String okText = 'Ok';
-  static const String settings = 'Settings';
+  static String get showingTitle => 'home.showing_title'.tr();
+  static String get popularTitle => 'home.popular_title'.tr();
+  static String get imbdText => 'home.imdb_text'.tr();
+  static String get buttonName => 'home.button_name'.tr();
+  static String get errorGenres => 'home.error_genres'.tr();
+  static String get filmImagePath => 'constants.film_image_path'.tr();
+  static String get filmImageErrorPath => 'constants.film_image_error_path'.tr();
+  static String get themeDarkText => 'home.theme_dark_text'.tr();
+  static String get languageText => 'home.language_text'.tr();
+  static String get okText => 'home.ok_text'.tr();
+  static String get settings => 'home.settings'.tr();
 
   // Detail Page
-  static const String snackBarLinkError = 'An error occurred, please try again later.';
-  static const String snacbarActionText = 'Close';
-  static const String country = 'Country';
-  static const String language = 'Language';
-  static const String budget = 'Budget';
-  static const String description = 'Description';
-  static const String companies = 'Companies';
+  static String get snackBarLinkError => 'detail.snackbar_link_error'.tr();
+  static String get snacbarActionText => 'detail.snackbar_action_text'.tr();
+  static String get country => 'detail.country'.tr();
+  static String get language => 'detail.language'.tr();
+  static String get budget => 'detail.budget'.tr();
+  static String get description => 'detail.description'.tr();
+  static String get companies => 'detail.companies'.tr();
 
   // Search Page
-  static const String appbarSearch = 'Film Search';
-  static const String tfHintText = 'Search films...';
-  static const String searchFilmText = 'Find the movie you want now 🔍';
-  static const String noSearchText = 'No results found 🔍';
+  static String get appbarSearch => 'search.appbar_search'.tr();
+  static String get tfHintText => 'search.tf_hint_text'.tr();
+  static String get searchFilmText => 'search.search_film_text'.tr();
 
   // Favorites Page
-  static const String favoriteText = 'Favorites';
-  static const String noFoundFilm = 'No movies were found that match your search criteria';
-  static const String noFavoriteFilm = "You haven't added any favorite movies yet";
-  static const String cleanSearch = 'Clean Search';
-  static const String forResults = 'for results';
+  static String get favoriteText => 'favorites.favorite_text'.tr();
+  static String get noFoundFilm => 'favorites.no_found_film'.tr();
+  static String get noFavoriteFilm => 'favorites.no_favorite_film'.tr();
+  static String get cleanSearch => 'favorites.clean_search'.tr();
+  static String get forResults => 'favorites.for_results'.tr();
 }

@@ -26,6 +26,7 @@ dependencies:
   # Core
   intl: ^0.19.0
   url_launcher: ^6.3.1
+  easy_localization: ^3.0.7
 
   # Navigate
   auto_route: ^9.2.2
@@ -53,6 +54,7 @@ flutter:
 
   assets:
     - .env
+    - assets/translations/
   #   - images/a_dot_ham.jpeg
 
   fonts:

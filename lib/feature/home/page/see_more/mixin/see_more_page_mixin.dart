@@ -30,6 +30,7 @@ mixin SeeMorePageMixin on State<SeeMorePage> {
   SliverGridDelegateWithFixedCrossAxisCount sliverGridDelegateWithFixedCrossAxisCount() {
     return const SliverGridDelegateWithFixedCrossAxisCount(
       crossAxisCount: 2,
+      mainAxisSpacing: 15,
       childAspectRatio: 2 / 3.7,
       crossAxisSpacing: 15,
     );

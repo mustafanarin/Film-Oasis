@@ -1,7 +1,7 @@
 import 'package:film_oasis/feature/home/model/film_detail_model.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-class CacheManager {
+class ModelCacheManager {
   static const String _boxName = 'favorite_film_box';
 
   Box<FilmDetailModel>? _box;

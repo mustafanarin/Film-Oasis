@@ -39,7 +39,7 @@ class _SearchPageState extends ConsumerState<SearchPage> with SearchPageMixin {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(ProjectStrings.appbarSearch),
+          title:  Text(ProjectStrings.appbarSearch),
         ),
         body: Padding(
           padding: context.paddingHorizantalLow2,

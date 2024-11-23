@@ -1,6 +1,6 @@
 import 'package:film_oasis/feature/favorite/state/favorite_state.dart';
 import 'package:film_oasis/feature/home/model/film_detail_model.dart';
-import 'package:film_oasis/product/cache/cache_manager.dart';
+import 'package:film_oasis/product/cache/model_cache_manager.dart';
 import 'package:film_oasis/product/utility/exception/provider_hive_exception.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -9,11 +9,11 @@ final favoriteProvider = AutoDisposeNotifierProvider<FavoriteNotifier, FavoriteS
 });
 
 class FavoriteNotifier extends AutoDisposeNotifier<FavoriteState> {
-  late final CacheManager _cacheManager;
+  late final ModelCacheManager _cacheManager;
 
   @override
   FavoriteState build() {
-    _cacheManager = CacheManager();
+    _cacheManager = ModelCacheManager();
     _initFavorites();
     return FavoriteState([], false);
   }

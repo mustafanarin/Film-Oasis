@@ -6,6 +6,6 @@ class _defaultSearhPageText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Expanded(child: Center(child: Text(ProjectStrings.searchFilmText)));
+    return  Expanded(child: Center(child: Text(ProjectStrings.searchFilmText)));
   }
 }

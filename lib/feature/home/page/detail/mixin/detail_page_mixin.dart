@@ -39,7 +39,7 @@ mixin DetailPageMixin on ConsumerState<DetailPage> {
   void _errorScafoldMesenger(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: const Text(
+        content:  Text(
           ProjectStrings.snackBarLinkError,
         ),
         duration: _errorMessageDuration,

@@ -37,7 +37,8 @@ class _SettingsDialog extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isDarkMode = ref.watch(themeProvider);
+    final isDarkMode = ref.watch(AppProviderItems.themeProvider);
+    final isTurkish = ref.watch(AppProviderItems.languageProvider);
 
     return AlertDialog(
       title: Text(
@@ -47,26 +48,29 @@ class _SettingsDialog extends ConsumerWidget {
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          // Theme Switch
           Padding(
             padding: context.paddingVerticalLow1,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(
-                  Icons.dark_mode_outlined,
-                  color: isDarkMode ? ProjectColors.white : ProjectColors.black,
-                ),
-                SizedBox(width: context.lowValue1),
-                Text(
-                  ProjectStrings.themeDarkText,
-                  style: context.textTheme().bodyLarge,
-                ),
-                SizedBox(
-                  width: context.lowValue2,
+                Row(
+                  children: [
+                    Icon(
+                      Icons.dark_mode_outlined,
+                      color: isDarkMode ? ProjectColors.white : ProjectColors.black,
+                    ),
+                    SizedBox(width: context.lowValue1),
+                    Text(
+                      ProjectStrings.themeDarkText,
+                      style: context.textTheme().bodyLarge,
+                    ),
+                  ],
                 ),
                 Switch(
                   value: isDarkMode,
                   onChanged: (value) {
-                    ref.read(themeProvider.notifier).toggleTheme();
+                    ref.read(AppProviderItems.themeProvider.notifier).toggleTheme();
                   },
                   activeColor: ProjectColors.cobaltBlue,
                   activeTrackColor: ProjectColors.cobaltBlue.withOpacity(0.5),
@@ -75,15 +79,32 @@ class _SettingsDialog extends ConsumerWidget {
             ),
           ),
           const Divider(),
+          // Language Switch
           Padding(
             padding: context.paddingVerticalLow1,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(Icons.language_outlined, color: isDarkMode ? ProjectColors.white : ProjectColors.black),
-                SizedBox(width: context.lowValue1),
-                Text(
-                  ProjectStrings.languageText,
-                  style: context.textTheme().bodyLarge,
+                Row(
+                  children: [
+                    Icon(
+                      Icons.language_outlined,
+                      color: isDarkMode ? ProjectColors.white : ProjectColors.black,
+                    ),
+                    SizedBox(width: context.lowValue1),
+                    Text(
+                      ProjectStrings.languageText,
+                      style: context.textTheme().bodyLarge,
+                    ),
+                  ],
+                ),
+                Switch(
+                  value: isTurkish,
+                  onChanged: (value) {
+                    ref.read(AppProviderItems.languageProvider.notifier).toggleLanguage(context);
+                  },
+                  activeColor: ProjectColors.cobaltBlue,
+                  activeTrackColor: ProjectColors.cobaltBlue.withOpacity(0.5),
                 ),
               ],
             ),

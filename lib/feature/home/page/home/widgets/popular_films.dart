@@ -12,7 +12,7 @@ class _PopularFilmsSection extends ConsumerWidget {
     final genreAsync = ref.watch(AppProviderItems.genreProvider);
 
     return genreAsync.when(
-      error: (error, stack) => const Text(ProjectStrings.errorGenres),
+      error: (error, stack) =>  Text(ProjectStrings.errorGenres),
       loading: () => const CircularProgressIndicator.adaptive(),
       data: (genreModel) {
         return ListView.builder(

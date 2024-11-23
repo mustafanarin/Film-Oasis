@@ -26,7 +26,7 @@ class _FavoritesAppBar extends StatelessWidget implements PreferredSizeWidget {
               animationController: animationController,
               onChanged: onSearchChanged,
             )
-          : const Text(ProjectStrings.favoriteText),
+          :  Text(ProjectStrings.favoriteText),
       centerTitle: !isSearching,
       actions: [
         IconButton(
