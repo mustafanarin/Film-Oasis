@@ -14,7 +14,8 @@ class ProjectCachedImage extends StatelessWidget {
     this.fit = BoxFit.cover,
     this.borderRadius,
     this.withShadow = true,
-    this.isBackdrop = false, this.color,
+    this.isBackdrop = false,
+    this.color,this.isFavoritePage,
   });
 
   final String? imageUrl;
@@ -25,6 +26,7 @@ class ProjectCachedImage extends StatelessWidget {
   final bool withShadow;
   final bool isBackdrop;
   final Color? color;
+  final bool? isFavoritePage;
 
   static final customCacheManager = CacheManager(
     Config(
@@ -68,7 +70,7 @@ class ProjectCachedImage extends StatelessWidget {
 
     if (!withShadow) return imageWidget;
 
-    return Container(
+    return (isFavoritePage == null) ? Container(
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
@@ -80,7 +82,7 @@ class ProjectCachedImage extends StatelessWidget {
         ],
       ),
       child: imageWidget,
-    );
+    ) : imageWidget;
   }
 }
 

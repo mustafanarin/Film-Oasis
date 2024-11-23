@@ -19,7 +19,7 @@ class _FavoriteIcon extends StatelessWidget {
       child: IconButton(
         onPressed: () => toggleFavorite(film),
         icon: Icon(
-          isFavorite ? Icons.bookmark : Icons.bookmark_outline,
+          isFavorite ? Icons.favorite : Icons.favorite_outline,
           color: isFavorite ? ProjectColors.red : null,
         ),
       ),

@@ -37,7 +37,7 @@ class TabbarPage extends HookWidget {
             label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.bookmark_outline),
+            icon: Icon(Icons.favorite_outline),
             label: '',
           ),
         ],

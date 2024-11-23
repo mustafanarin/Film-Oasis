@@ -12,8 +12,8 @@ import 'package:film_oasis/product/navigate/app_router.gr.dart';
 import 'package:film_oasis/product/provider/app_provider_items.dart';
 import 'package:film_oasis/product/widgets/cached_network_image.dart';
 import 'package:film_oasis/product/widgets/genre_chips.dart';
-import 'package:film_oasis/product/widgets/project_button.dart';
 import 'package:film_oasis/product/widgets/release_date_text.dart';
+import 'package:film_oasis/product/widgets/see_more_button.dart';
 import 'package:film_oasis/product/widgets/text_film_imbd.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -31,11 +31,10 @@ final class HomePage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomePage> with HomePageMixin, AutomaticKeepAliveClientMixin {
-
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    
+
     final nowShowing = nowShowingState;
     final popularFilms = popularFilmsState;
 

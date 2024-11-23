@@ -14,7 +14,7 @@ class _FavoritesFilms extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       slivers: [
         if (searchQuery.isNotEmpty)
-          _SearchResultsHeader(
+          SearchResultsHeader(
             searchQuery: searchQuery,
             resultCount: filteredFavorites.length,
           ),
@@ -24,8 +24,8 @@ class _FavoritesFilms extends StatelessWidget {
   }
 }
 
-class _SearchResultsHeader extends StatelessWidget {
-  const _SearchResultsHeader({
+class SearchResultsHeader extends StatelessWidget {
+  const SearchResultsHeader({
     required this.searchQuery,
     required this.resultCount,
   });
@@ -34,7 +34,6 @@ class _SearchResultsHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
 
     return SliverToBoxAdapter(
       child: Padding(
@@ -42,8 +41,8 @@ class _SearchResultsHeader extends StatelessWidget {
         child: Row(
           children: [
             Text(
-              '"$searchQuery" için sonuçlar',
-              style: textTheme.bodySmall,
+              '"$searchQuery" ${ProjectStrings.forResults}',
+              style: context.textTheme().bodySmall,
             ),
             SizedBox(width: context.lowValue1),
             Container(
@@ -57,7 +56,7 @@ class _SearchResultsHeader extends StatelessWidget {
               ),
               child: Text(
                 resultCount.toString(),
-                style: textTheme.labelSmall?.copyWith(
+                style: context.textTheme().labelSmall?.copyWith(
                   color: ProjectColors.white,
                 ),
               ),

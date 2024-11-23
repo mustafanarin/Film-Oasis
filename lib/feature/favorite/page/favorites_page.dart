@@ -5,13 +5,15 @@ import 'package:film_oasis/feature/home/model/film_detail_model.dart';
 import 'package:film_oasis/product/constants/enum/icon_sizes.dart';
 import 'package:film_oasis/product/constants/enum/project_radius.dart';
 import 'package:film_oasis/product/constants/project_colors.dart';
+import 'package:film_oasis/product/constants/project_strings.dart';
 import 'package:film_oasis/product/extensions/context_extension.dart';
 import 'package:film_oasis/product/navigate/app_router.gr.dart';
+import 'package:film_oasis/product/widgets/cached_network_image.dart';
+import 'package:film_oasis/product/widgets/search_clear_button.dart';
+import 'package:film_oasis/product/widgets/project_textfield.dart';
 import 'package:film_oasis/product/widgets/release_date_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-// TODO film image cacheden kullan
 
 part './widgets/animation_appbar.dart';
 part './widgets/empty_state_view.dart';

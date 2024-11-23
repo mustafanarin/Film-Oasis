@@ -48,9 +48,6 @@ abstract final class AppTheme {
           actionTextColor: ProjectColors.white,
         ),
         inputDecorationTheme: InputDecorationTheme(
-          // border: OutlineInputBorder(
-          //   borderRadius: BorderRadius.circular(12),
-          // ),
           suffixIconColor: ProjectColors.cobaltBlue,
           focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: ProjectColors.cobaltBlue),

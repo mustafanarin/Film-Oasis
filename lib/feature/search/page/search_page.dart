@@ -3,6 +3,7 @@ import 'package:film_oasis/feature/search/model/search_model.dart';
 import 'package:film_oasis/feature/search/page/mixin/search_page_mixin.dart';
 import 'package:film_oasis/feature/search/state/search_state.dart';
 import 'package:film_oasis/product/constants/enum/project_elevation.dart';
+import 'package:film_oasis/product/constants/enum/project_radius.dart';
 import 'package:film_oasis/product/constants/project_colors.dart';
 import 'package:film_oasis/product/constants/project_strings.dart';
 import 'package:film_oasis/product/extensions/context_extension.dart';
@@ -10,14 +11,16 @@ import 'package:film_oasis/product/navigate/app_router.gr.dart';
 import 'package:film_oasis/product/provider/app_provider_items.dart';
 import 'package:film_oasis/product/widgets/project_textfield.dart';
 import 'package:film_oasis/product/widgets/release_date_text.dart';
+import 'package:film_oasis/product/widgets/search_clear_button.dart';
 import 'package:film_oasis/product/widgets/text_film_imbd.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 part './widgets/circular_progress.dart';
+part './widgets/default_search_page_text.dart';
 part './widgets/list_search_result.dart';
 part './widgets/row_date_imbd.dart';
-part './widgets/text_no_search.dart';
+part 'widgets/no_result_view.dart';
 
 @RoutePage()
 final class SearchPage extends ConsumerStatefulWidget {
@@ -42,17 +45,23 @@ class _SearchPageState extends ConsumerState<SearchPage> with SearchPageMixin {
           padding: context.paddingHorizantalLow2,
           child: Column(
             children: [
-              ProjectSearchTextField(
+              ProjectTextField(
+                prefixIcon: const Icon(Icons.search),
                 controller: searchController,
                 onChanged: onSearchChanged,
                 onClearPressed: clearSearch,
               ),
-              if (state.isLoading)
+              if (searchController.text.isEmpty)
+                const _defaultSearhPageText()
+              else if (state.isLoading)
                 const _CircularProgessIndicator()
-              else if (state.searchModel.results?.isNotEmpty ?? false)
-                _ListViewSearchResult(state: state)
+              else if (state.searchModel.results?.isEmpty ?? true)
+                _NoResultView(clearSearch)
               else
-                const _TextNoSearch(),
+                _ListViewSearchResult(
+                  state: state,
+                  searchQuery: searchController.text,
+                ),
             ],
           ),
         ),

@@ -26,7 +26,7 @@ class _FavoritesAppBar extends StatelessWidget implements PreferredSizeWidget {
               animationController: animationController,
               onChanged: onSearchChanged,
             )
-          : const Text('Favorites'),
+          : const Text(ProjectStrings.favoriteText),
       centerTitle: !isSearching,
       actions: [
         IconButton(
@@ -56,24 +56,16 @@ class _SearchField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-
     return SizeTransition(
       sizeFactor: animationController,
       axis: Axis.horizontal,
       axisAlignment: -1,
-      child: TextField(
+      child: ProjectTextField(
         controller: controller,
         focusNode: focusNode,
-        style: textTheme.bodyMedium,
-        decoration: InputDecoration(
-          hintText: 'Film ara...',
-          hintStyle: textTheme.bodySmall,
-          border: InputBorder.none,
-          contentPadding: EdgeInsets.symmetric(
-            horizontal: context.lowValue2,
-            vertical: context.lowValue1,
-          ),
+        contentPadding: EdgeInsets.symmetric(
+          horizontal: context.lowValue2,
+          vertical: context.lowValue1,
         ),
         onChanged: onChanged,
       ),

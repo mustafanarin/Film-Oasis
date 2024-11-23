@@ -10,34 +10,30 @@ class _EmptyStateView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
 
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            searchQuery.isNotEmpty ? Icons.search_off : Icons.favorite_outline,
-            size: context.dynamicHeight(0.12),
-            color: ProjectColors.grey.withOpacity(0.5),
-          ),
-          const SizedBox(height: 24),
-          Text(
-            searchQuery.isNotEmpty ? 'Aradığınız kriterlere uygun film bulunamadı' : 'Henüz favori film eklemediniz',
-            style: textTheme.bodyMedium,
-            textAlign: TextAlign.center,
-          ),
-          if (searchQuery.isNotEmpty) ...[
-            SizedBox(height: context.lowValue2),
-            ElevatedButton(
-              onPressed: onClearSearch,
-              child: Text(
-                'Aramayı Temizle',
-                style: textTheme.labelMedium,
-              ),
+      child: Padding(
+        padding: context.paddingAllLow1,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              searchQuery.isNotEmpty ? Icons.search_off : Icons.favorite_outline,
+              size: context.dynamicHeight(0.12),
+              color: ProjectColors.grey.withOpacity(0.5),
             ),
+             SizedBox(height: context.mediumValue),
+            Text(
+              searchQuery.isNotEmpty ? ProjectStrings.noFoundFilm : ProjectStrings.noFavoriteFilm,
+              style: context.textTheme().bodyMedium,
+              textAlign: TextAlign.center,
+            ),
+            if (searchQuery.isNotEmpty) ...[
+              SizedBox(height: context.lowValue2),
+              SearchClearButton(onClearSearch: onClearSearch),
+            ],
           ],
-        ],
+        ),
       ),
     );
   }
