@@ -1,3 +1,6 @@
+import 'package:film_oasis/feature/favorite/provider/favorite_provider.dart';
+import 'package:film_oasis/feature/favorite/state/favorite_state.dart';
+import 'package:film_oasis/feature/home/model/film_detail_model.dart';
 import 'package:film_oasis/feature/home/model/genre_model.dart';
 import 'package:film_oasis/feature/home/provider/film_detail_provider.dart';
 import 'package:film_oasis/feature/home/provider/language_provider.dart';
@@ -9,8 +12,10 @@ import 'package:film_oasis/feature/home/state/now_showing_state.dart';
 import 'package:film_oasis/feature/home/state/popular_films_state.dart';
 import 'package:film_oasis/feature/search/provider/search_provider.dart';
 import 'package:film_oasis/feature/search/state/search_state.dart';
+import 'package:film_oasis/product/cache/interface/i_model_cache_manager.dart';
 import 'package:film_oasis/product/cache/interface/i_theme_language_cache_manager.dart';
 import 'package:film_oasis/product/cache/language_cache_manager.dart';
+import 'package:film_oasis/product/cache/model_cache_manager.dart';
 import 'package:film_oasis/product/cache/theme_cache_manager.dart';
 import 'package:film_oasis/service/film_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -36,7 +41,7 @@ final class AppProviderItems {
   });
 
   static final searchProvider = AutoDisposeNotifierProvider<SearchNotifier, SearchState>(
-    () => SearchNotifier(),
+    SearchNotifier.new,
   );
 
   static final languageCacheProvider = Provider<IThemeLanguageCacheManager<bool>>((ref) {
@@ -49,11 +54,19 @@ final class AppProviderItems {
   });
 
   static final themeCacheProvider = Provider<IThemeLanguageCacheManager<bool>>((ref) {
-  return ThemeCacheManager();
-});
+    return ThemeCacheManager();
+  });
 
-static final themeProvider = StateNotifierProvider<ThemeNotifier, bool>((ref) {
-  final cacheManager = ref.watch(themeCacheProvider);
-  return ThemeNotifier(cacheManager);
-});
+  static final themeProvider = StateNotifierProvider<ThemeNotifier, bool>((ref) {
+    final cacheManager = ref.watch(themeCacheProvider);
+    return ThemeNotifier(cacheManager);
+  });
+
+  static final modelCacheProvider = Provider<IModelCacheManager<FilmDetailModel>>((ref) {
+    return ModelCacheManager();
+  });
+
+  static final favoriteProvider = StateNotifierProvider<FavoriteNotifier, FavoriteState>((ref) {
+    return FavoriteNotifier(ref: ref);
+  });
 }

@@ -1,4 +1,3 @@
-import 'package:film_oasis/feature/favorite/provider/favorite_provider.dart';
 import 'package:film_oasis/feature/home/model/film_detail_model.dart';
 import 'package:film_oasis/feature/home/page/detail/detail_page.dart';
 import 'package:film_oasis/product/constants/enum/project_radius.dart';
@@ -54,11 +53,11 @@ mixin DetailPageMixin on ConsumerState<DetailPage> {
   }
 
   void toggleFavorite(FilmDetailModel film) {
-    ref.read(favoriteProvider.notifier).toggleFavorite(film);
+    ref.read(AppProviderItems.favoriteProvider.notifier).toggleFavorite(film);
   }
 
   bool checkIsFavorite(FilmDetailModel film) {
-    return ref.watch(favoriteProvider).model?.any(
+    return ref.watch(AppProviderItems.favoriteProvider).model?.any(
               (f) => f.id == film.id,
             ) ??
         false;

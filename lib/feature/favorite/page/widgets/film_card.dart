@@ -195,7 +195,7 @@ class _FavoriteIconButton extends StatelessWidget {
           child: InkWell(
             borderRadius: BorderRadius.circular(ProjectRadius.small.value),
             onTap: () {
-              ref.read(favoriteProvider.notifier).toggleFavorite(film);
+              ref.read(AppProviderItems.favoriteProvider.notifier).toggleFavorite(film);
             },
             child: Container(
               padding: context.paddingAllLow1,

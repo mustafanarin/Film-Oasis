@@ -1,6 +1,6 @@
 import 'package:film_oasis/feature/favorite/page/favorites_page.dart';
-import 'package:film_oasis/feature/favorite/provider/favorite_provider.dart';
 import 'package:film_oasis/feature/home/model/film_detail_model.dart';
+import 'package:film_oasis/product/provider/app_provider_items.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -23,7 +23,7 @@ mixin FavoritePageMixin on ConsumerState<FavoritesPage> {
     );
 
     Future.microtask(() {
-      ref.read(favoriteProvider.notifier).getFavorite();
+      ref.read(AppProviderItems.favoriteProvider.notifier).getFavorite();
     });
   }
 

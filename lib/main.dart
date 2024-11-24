@@ -8,10 +8,6 @@ import 'package:film_oasis/product/utility/initialize/app_initializer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// TODO model cache manager interface kullan
-// TODO cache manager key enum oluştur
-// TODO favorite bug
-
 Future<void> main() async {
   await AppInitializer.initialize();
   runApp(

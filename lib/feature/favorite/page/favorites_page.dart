@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:film_oasis/feature/favorite/page/mixin/favorite_page_mixin.dart';
-import 'package:film_oasis/feature/favorite/provider/favorite_provider.dart';
 import 'package:film_oasis/feature/home/model/film_detail_model.dart';
 import 'package:film_oasis/product/constants/enum/icon_sizes.dart';
 import 'package:film_oasis/product/constants/enum/project_radius.dart';
@@ -8,10 +7,11 @@ import 'package:film_oasis/product/constants/project_colors.dart';
 import 'package:film_oasis/product/constants/project_strings.dart';
 import 'package:film_oasis/product/extensions/context_extension.dart';
 import 'package:film_oasis/product/navigate/app_router.gr.dart';
+import 'package:film_oasis/product/provider/app_provider_items.dart';
 import 'package:film_oasis/product/widgets/cached_network_image.dart';
-import 'package:film_oasis/product/widgets/search_clear_button.dart';
 import 'package:film_oasis/product/widgets/project_textfield.dart';
 import 'package:film_oasis/product/widgets/release_date_text.dart';
+import 'package:film_oasis/product/widgets/search_clear_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -30,7 +30,7 @@ final class FavoritesPage extends ConsumerStatefulWidget {
 class _FavoritesPageState extends ConsumerState<FavoritesPage> with SingleTickerProviderStateMixin, FavoritePageMixin {
   @override
   Widget build(BuildContext context) {
-    final favoriteState = ref.watch(favoriteProvider);
+    final favoriteState = ref.watch(AppProviderItems.favoriteProvider);
     final favorites = favoriteState.model ?? [];
     final filteredFavorites = filterFavorites(favorites);
 

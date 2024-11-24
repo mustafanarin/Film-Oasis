@@ -55,7 +55,6 @@ flutter:
   assets:
     - .env
     - assets/translations/
-  #   - images/a_dot_ham.jpeg
 
   fonts:
     - family: Merriweather

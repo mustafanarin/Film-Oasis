@@ -1,12 +1,12 @@
-import 'dart:io' show HttpStatus;
-
 import 'package:dio/dio.dart';
 import 'package:film_oasis/feature/home/model/film_detail_model.dart';
 import 'package:film_oasis/feature/home/model/genre_model.dart';
 import 'package:film_oasis/feature/home/model/now_showing_model.dart';
 import 'package:film_oasis/feature/home/model/popular_film_model.dart';
 import 'package:film_oasis/feature/search/model/search_model.dart';
+import 'package:film_oasis/product/constants/enum/film_api_path.dart';
 import 'package:film_oasis/product/utility/exception/dio_excepiton.dart';
+import 'package:film_oasis/service/mixin/film_service_mixin.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 abstract class IFilmService {
@@ -17,7 +17,7 @@ abstract class IFilmService {
   Future<SearchModel> searchMovies(String query);
 }
 
-class FilmService implements IFilmService {
+class FilmService with FilmServiceMixin implements IFilmService {
   FilmService()
       : _dio = Dio(
           BaseOptions(
@@ -31,10 +31,10 @@ class FilmService implements IFilmService {
   @override
   Future<NowShowingModel> getNowShowing() async {
     try {
-      final response = await _dio.get<Map<String, dynamic>>(_FilmApiPath.nowPlaying.value);
-      _checkResponseStatus(response);
+      final response = await _dio.get<Map<String, dynamic>>(FilmApiPath.nowPlaying.value);
+      checkResponseStatus(response);
 
-      final data = _extractData(response.data);
+      final data = extractData(response.data);
       return NowShowingModel.fromJson(data);
     } on DioException catch (e) {
       throw AppDioException('API Error: ${e.message}');
@@ -46,10 +46,10 @@ class FilmService implements IFilmService {
   @override
   Future<PopularFilmModel> getPopularFilms() async {
     try {
-      final response = await _dio.get<Map<String, dynamic>>(_FilmApiPath.popular.value);
-      _checkResponseStatus(response);
+      final response = await _dio.get<Map<String, dynamic>>(FilmApiPath.popular.value);
+      checkResponseStatus(response);
 
-      final data = _extractData(response.data);
+      final data = extractData(response.data);
       return PopularFilmModel.fromJson(data);
     } on DioException catch (e) {
       throw AppDioException('API Error: ${e.message}');
@@ -61,10 +61,10 @@ class FilmService implements IFilmService {
   @override
   Future<GenreModel> getGenres() async {
     try {
-      final response = await _dio.get<Map<String, dynamic>>(_FilmApiPath.genreMovie.value);
-      _checkResponseStatus(response);
+      final response = await _dio.get<Map<String, dynamic>>(FilmApiPath.genreMovie.value);
+      checkResponseStatus(response);
 
-      final data = _extractData(response.data, isResultsRequired: false);
+      final data = extractData(response.data, isResultsRequired: false);
       return GenreModel.fromJson(data);
     } on DioException catch (e) {
       throw AppDioException('API Error: ${e.message}');
@@ -77,11 +77,11 @@ class FilmService implements IFilmService {
   Future<FilmDetailModel> getFilmDetail(int filmId) async {
     try {
       final response = await _dio.get<Map<String, dynamic>>(
-        '${_FilmApiPath.detail.value}/$filmId',
+        '${FilmApiPath.detail.value}/$filmId',
       );
-      _checkResponseStatus(response);
+      checkResponseStatus(response);
 
-      final data = _extractData(response.data, isResultsRequired: false);
+      final data = extractData(response.data, isResultsRequired: false);
       return FilmDetailModel.fromJson(data);
     } on DioException catch (e) {
       throw AppDioException('API Error: ${e.message}');
@@ -94,14 +94,14 @@ class FilmService implements IFilmService {
   Future<SearchModel> searchMovies(String query) async {
     try {
       final response = await _dio.get<Map<String, dynamic>>(
-        _FilmApiPath.search.value,
+        FilmApiPath.search.value,
         queryParameters: {
           'query': query,
         },
       );
-      _checkResponseStatus(response);
+      checkResponseStatus(response);
 
-      final data = _extractData(response.data);
+      final data = extractData(response.data);
       return SearchModel.fromJson(data);
     } on DioException catch (e) {
       throw AppDioException('API Error: ${e.message}');
@@ -109,31 +109,4 @@ class FilmService implements IFilmService {
       throw AppDioException('An unknown error occurred: $e');
     }
   }
-
-  void _checkResponseStatus(Response<Map<String, dynamic>> response) {
-    if (response.statusCode != HttpStatus.ok) {
-      throw AppDioException('Failed to load data', statusCode: response.statusCode);
-    }
-  }
-
-  Map<String, dynamic> _extractData(Map<String, dynamic>? data, {bool isResultsRequired = true}) {
-    if (data != null && (!isResultsRequired || data.containsKey(_FilmApiPath.results.value))) {
-      return data;
-    } else {
-      throw AppDioException('Error: Data not available!');
-    }
-  }
-}
-
-enum _FilmApiPath {
-  nowPlaying('movie/now_playing'),
-  popular('movie/popular'),
-  genreMovie('genre/movie/list'),
-  detail('movie'),
-  search('search/movie'),
-  results('results');
-
-  const _FilmApiPath(this.value);
-
-  final String value;
 }

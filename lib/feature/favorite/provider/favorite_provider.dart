@@ -1,22 +1,19 @@
 import 'package:film_oasis/feature/favorite/state/favorite_state.dart';
 import 'package:film_oasis/feature/home/model/film_detail_model.dart';
-import 'package:film_oasis/product/cache/model_cache_manager.dart';
+import 'package:film_oasis/product/cache/interface/i_model_cache_manager.dart';
+import 'package:film_oasis/product/provider/app_provider_items.dart';
 import 'package:film_oasis/product/utility/exception/provider_hive_exception.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final favoriteProvider = AutoDisposeNotifierProvider<FavoriteNotifier, FavoriteState>(() {
-  return FavoriteNotifier();
-});
-
-class FavoriteNotifier extends AutoDisposeNotifier<FavoriteState> {
-  late final ModelCacheManager _cacheManager;
-
-  @override
-  FavoriteState build() {
-    _cacheManager = ModelCacheManager();
+class FavoriteNotifier extends StateNotifier<FavoriteState> {
+  FavoriteNotifier({
+    required Ref ref,
+  }) : super(FavoriteState([], false)) {
+    _cacheManager = ref.read(AppProviderItems.modelCacheProvider);
     _initFavorites();
-    return FavoriteState([], false);
   }
+
+  late final IModelCacheManager<FilmDetailModel> _cacheManager;
 
   Future<void> _initFavorites() async {
     await getFavorite();
