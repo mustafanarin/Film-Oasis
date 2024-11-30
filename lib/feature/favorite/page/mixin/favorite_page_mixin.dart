@@ -1,5 +1,6 @@
 import 'package:film_oasis/feature/favorite/page/favorites_page.dart';
 import 'package:film_oasis/feature/home/model/film_detail_model.dart';
+import 'package:film_oasis/product/constants/enum/app_duration.dart';
 import 'package:film_oasis/product/provider/app_provider_items.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,7 +11,7 @@ mixin FavoritePageMixin on ConsumerState<FavoritesPage> {
   late final TextEditingController searchController;
   late final FocusNode searchFocusNode;
   late final AnimationController animationController;
-  static const _animationDuration = Duration(milliseconds: 300);
+  static final _animationDuration = Duration(milliseconds: AppDuration.smallMilliSeconds.value);
 
   @override
   void initState() {

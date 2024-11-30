@@ -8,22 +8,24 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i7;
+import 'package:auto_route/auto_route.dart' as _i8;
 import 'package:film_oasis/feature/favorite/page/favorites_page.dart' as _i2;
 import 'package:film_oasis/feature/home/page/detail/detail_page.dart' as _i1;
 import 'package:film_oasis/feature/home/page/home/home_page.dart' as _i3;
-import 'package:film_oasis/feature/home/page/see_more/see_more_page.dart' as _i5;
+import 'package:film_oasis/feature/home/page/see_more/see_more_page.dart'
+    as _i5;
 import 'package:film_oasis/feature/search/page/search_page.dart' as _i4;
-import 'package:film_oasis/feature/tabbar/tabbar_page.dart' as _i6;
-import 'package:flutter/material.dart' as _i8;
+import 'package:film_oasis/feature/splash/splash_page.dart' as _i6;
+import 'package:film_oasis/feature/tabbar/tabbar_page.dart' as _i7;
+import 'package:flutter/material.dart' as _i9;
 
 /// generated route for
 /// [_i1.DetailPage]
-class DetailRoute extends _i7.PageRouteInfo<DetailRouteArgs> {
+class DetailRoute extends _i8.PageRouteInfo<DetailRouteArgs> {
   DetailRoute({
     required int filmId,
-    _i8.Key? key,
-    List<_i7.PageRouteInfo>? children,
+    _i9.Key? key,
+    List<_i8.PageRouteInfo>? children,
   }) : super(
           DetailRoute.name,
           args: DetailRouteArgs(
@@ -35,7 +37,7 @@ class DetailRoute extends _i7.PageRouteInfo<DetailRouteArgs> {
 
   static const String name = 'DetailRoute';
 
-  static _i7.PageInfo page = _i7.PageInfo(
+  static _i8.PageInfo page = _i8.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<DetailRouteArgs>();
@@ -55,7 +57,7 @@ class DetailRouteArgs {
 
   final int filmId;
 
-  final _i8.Key? key;
+  final _i9.Key? key;
 
   @override
   String toString() {
@@ -65,8 +67,8 @@ class DetailRouteArgs {
 
 /// generated route for
 /// [_i2.FavoritesPage]
-class FavoritesRoute extends _i7.PageRouteInfo<void> {
-  const FavoritesRoute({List<_i7.PageRouteInfo>? children})
+class FavoritesRoute extends _i8.PageRouteInfo<void> {
+  const FavoritesRoute({List<_i8.PageRouteInfo>? children})
       : super(
           FavoritesRoute.name,
           initialChildren: children,
@@ -74,7 +76,7 @@ class FavoritesRoute extends _i7.PageRouteInfo<void> {
 
   static const String name = 'FavoritesRoute';
 
-  static _i7.PageInfo page = _i7.PageInfo(
+  static _i8.PageInfo page = _i8.PageInfo(
     name,
     builder: (data) {
       return const _i2.FavoritesPage();
@@ -84,8 +86,8 @@ class FavoritesRoute extends _i7.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.HomePage]
-class HomeRoute extends _i7.PageRouteInfo<void> {
-  const HomeRoute({List<_i7.PageRouteInfo>? children})
+class HomeRoute extends _i8.PageRouteInfo<void> {
+  const HomeRoute({List<_i8.PageRouteInfo>? children})
       : super(
           HomeRoute.name,
           initialChildren: children,
@@ -93,7 +95,7 @@ class HomeRoute extends _i7.PageRouteInfo<void> {
 
   static const String name = 'HomeRoute';
 
-  static _i7.PageInfo page = _i7.PageInfo(
+  static _i8.PageInfo page = _i8.PageInfo(
     name,
     builder: (data) {
       return const _i3.HomePage();
@@ -103,8 +105,8 @@ class HomeRoute extends _i7.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.SearchPage]
-class SearchRoute extends _i7.PageRouteInfo<void> {
-  const SearchRoute({List<_i7.PageRouteInfo>? children})
+class SearchRoute extends _i8.PageRouteInfo<void> {
+  const SearchRoute({List<_i8.PageRouteInfo>? children})
       : super(
           SearchRoute.name,
           initialChildren: children,
@@ -112,7 +114,7 @@ class SearchRoute extends _i7.PageRouteInfo<void> {
 
   static const String name = 'SearchRoute';
 
-  static _i7.PageInfo page = _i7.PageInfo(
+  static _i8.PageInfo page = _i8.PageInfo(
     name,
     builder: (data) {
       return const _i4.SearchPage();
@@ -122,11 +124,11 @@ class SearchRoute extends _i7.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.SeeMorePage]
-class SeeMoreRoute extends _i7.PageRouteInfo<SeeMoreRouteArgs> {
+class SeeMoreRoute extends _i8.PageRouteInfo<SeeMoreRouteArgs> {
   SeeMoreRoute({
     required List<dynamic> movieList,
-    _i8.Key? key,
-    List<_i7.PageRouteInfo>? children,
+    _i9.Key? key,
+    List<_i8.PageRouteInfo>? children,
   }) : super(
           SeeMoreRoute.name,
           args: SeeMoreRouteArgs(
@@ -138,7 +140,7 @@ class SeeMoreRoute extends _i7.PageRouteInfo<SeeMoreRouteArgs> {
 
   static const String name = 'SeeMoreRoute';
 
-  static _i7.PageInfo page = _i7.PageInfo(
+  static _i8.PageInfo page = _i8.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<SeeMoreRouteArgs>();
@@ -158,7 +160,7 @@ class SeeMoreRouteArgs {
 
   final List<dynamic> movieList;
 
-  final _i8.Key? key;
+  final _i9.Key? key;
 
   @override
   String toString() {
@@ -167,9 +169,28 @@ class SeeMoreRouteArgs {
 }
 
 /// generated route for
-/// [_i6.TabbarPage]
-class TabbarRoute extends _i7.PageRouteInfo<void> {
-  const TabbarRoute({List<_i7.PageRouteInfo>? children})
+/// [_i6.SplashScreen]
+class SplashRoute extends _i8.PageRouteInfo<void> {
+  const SplashRoute({List<_i8.PageRouteInfo>? children})
+      : super(
+          SplashRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SplashRoute';
+
+  static _i8.PageInfo page = _i8.PageInfo(
+    name,
+    builder: (data) {
+      return const _i6.SplashScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [_i7.TabbarPage]
+class TabbarRoute extends _i8.PageRouteInfo<void> {
+  const TabbarRoute({List<_i8.PageRouteInfo>? children})
       : super(
           TabbarRoute.name,
           initialChildren: children,
@@ -177,10 +198,10 @@ class TabbarRoute extends _i7.PageRouteInfo<void> {
 
   static const String name = 'TabbarRoute';
 
-  static _i7.PageInfo page = _i7.PageInfo(
+  static _i8.PageInfo page = _i8.PageInfo(
     name,
     builder: (data) {
-      return const _i6.TabbarPage();
+      return const _i7.TabbarPage();
     },
   );
 }

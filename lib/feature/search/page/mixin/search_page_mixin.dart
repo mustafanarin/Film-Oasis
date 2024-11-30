@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:film_oasis/feature/search/page/search_page.dart';
+import 'package:film_oasis/product/constants/enum/app_duration.dart';
 import 'package:film_oasis/product/provider/app_provider_items.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,7 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 mixin SearchPageMixin on ConsumerState<SearchPage> {
   late final TextEditingController searchController;
   Timer? _debounceTimer;
-  static const _debounceDuration = Duration(milliseconds: 500);
+  static final _debounceDuration = Duration(milliseconds: AppDuration.mediumMilliSeconds.value);
 
   @override
   void initState() {
@@ -34,7 +35,6 @@ mixin SearchPageMixin on ConsumerState<SearchPage> {
       }
     });
   }
-
 
   void clearSearch() {
     searchController.clear();

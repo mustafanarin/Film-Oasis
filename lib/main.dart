@@ -8,6 +8,8 @@ import 'package:film_oasis/product/utility/initialize/app_initializer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+  // TODO future builder kullan
+
 Future<void> main() async {
   await AppInitializer.initialize();
   runApp(
@@ -23,7 +25,7 @@ Future<void> main() async {
 
 class MyApp extends ConsumerWidget {
   MyApp({super.key});
-
+  
   final _appRouter = AppRouter();
   @override
   Widget build(BuildContext context, WidgetRef ref) {

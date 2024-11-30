@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:film_oasis/product/constants/enum/app_duration.dart';
 import 'package:film_oasis/product/constants/enum/project_radius.dart';
 import 'package:film_oasis/product/constants/project_colors.dart';
 import 'package:film_oasis/product/constants/project_strings.dart';
@@ -15,7 +16,8 @@ class ProjectCachedImage extends StatelessWidget {
     this.borderRadius,
     this.withShadow = true,
     this.isBackdrop = false,
-    this.color,this.isFavoritePage,
+    this.color,
+    this.isFavoritePage,
   });
 
   final String? imageUrl;
@@ -31,7 +33,7 @@ class ProjectCachedImage extends StatelessWidget {
   static final customCacheManager = CacheManager(
     Config(
       _CacheKey.filmOasisCacheKey.name,
-      stalePeriod: const Duration(days: 3),
+      stalePeriod: Duration(days: AppDuration.three.value),
       maxNrOfCacheObjects: 100,
     ),
   );
@@ -58,8 +60,8 @@ class ProjectCachedImage extends StatelessWidget {
         width: width,
         fit: fit,
         cacheManager: customCacheManager,
-        fadeInDuration: const Duration(milliseconds: 300),
-        fadeOutDuration: const Duration(milliseconds: 300),
+        fadeInDuration: Duration(milliseconds: AppDuration.smallMilliSeconds.value),
+        fadeOutDuration: Duration(milliseconds: AppDuration.smallMilliSeconds.value),
         memCacheHeight: (height ?? 300).toInt() * 2,
         placeholder: (context, url) => const Center(
           child: CircularProgressIndicator.adaptive(),
@@ -70,19 +72,21 @@ class ProjectCachedImage extends StatelessWidget {
 
     if (!withShadow) return imageWidget;
 
-    return (isFavoritePage == null) ? Container(
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: ProjectColors.black.withOpacity(0.3),
-            spreadRadius: 3,
-            blurRadius: 10,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: imageWidget,
-    ) : imageWidget;
+    return (isFavoritePage == null)
+        ? Container(
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: ProjectColors.black.withOpacity(0.3),
+                  spreadRadius: 3,
+                  blurRadius: 10,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: imageWidget,
+          )
+        : imageWidget;
   }
 }
 

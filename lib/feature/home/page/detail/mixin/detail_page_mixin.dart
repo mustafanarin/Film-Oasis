@@ -1,5 +1,6 @@
 import 'package:film_oasis/feature/home/model/film_detail_model.dart';
 import 'package:film_oasis/feature/home/page/detail/detail_page.dart';
+import 'package:film_oasis/product/constants/enum/app_duration.dart';
 import 'package:film_oasis/product/constants/enum/project_radius.dart';
 import 'package:film_oasis/product/constants/project_strings.dart';
 import 'package:film_oasis/product/provider/app_provider_items.dart';
@@ -8,7 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 mixin DetailPageMixin on ConsumerState<DetailPage> {
-  static const _errorMessageDuration = Duration(seconds: 2);
+  static final _errorMessageDuration = Duration(seconds: AppDuration.two.value);
 
   @override
   void initState() {
