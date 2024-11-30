@@ -9,9 +9,12 @@
       "theme_dark_text": "Dark Theme",
       "language_text": "Turkish",
       "ok_text": "Ok",
-      "settings": "Settings"
+      "settings": "Settings",
+      "tryAgain": "Try Again",
+      "dontLoadData": "Data could not be loaded"
     },
     "detail": {
+      "detail_title": "Film Detail",
       "snackbar_link_error": "An error occurred, please try again later.",
       "snackbar_action_text": "Close",
       "country": "Country",

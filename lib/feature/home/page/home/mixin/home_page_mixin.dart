@@ -1,35 +1,26 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:film_oasis/feature/home/model/now_showing_model.dart';
+import 'package:film_oasis/feature/home/model/popular_film_model.dart';
 import 'package:film_oasis/feature/home/page/home/home_page.dart';
-import 'package:film_oasis/feature/home/state/now_showing_state.dart';
-import 'package:film_oasis/feature/home/state/popular_films_state.dart';
 import 'package:film_oasis/product/navigate/app_router.gr.dart';
 import 'package:film_oasis/product/provider/app_provider_items.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 mixin HomePageMixin on ConsumerState<HomePage> {
-  NowShowingState get nowShowingState => ref.watch(AppProviderItems.nowShowingProvider);
-  PopularFilmsState get popularFilmsState => ref.watch(AppProviderItems.popularFilmsProvider);
+  AsyncValue<NowShowingModel> get nowShowingState => ref.watch(AppProviderItems.nowShowingProvider);
+
+  AsyncValue<PopularFilmModel> get popularFilmsState => ref.watch(AppProviderItems.popularFilmsProvider);
 
   bool get wantKeepAlive => true;
 
-
-  @override
-  void initState() {
-    super.initState();
-    Future.microtask(() {
-      ref.read(AppProviderItems.nowShowingProvider.notifier).getNowShowing();
-      ref.read(AppProviderItems.popularFilmsProvider.notifier).getPopularFilms();
-    });
-  }
-
   void navigateToNowShowing(BuildContext context) {
-    final movies = nowShowingState.nowShowingModel.results ?? [];
+    final movies = nowShowingState.value?.results ?? [];
     _navigateToSeeMorePage(context, movies);
   }
 
   void navigateToPopular(BuildContext context) {
-    final movies = popularFilmsState.popularFilmsModel.results ?? [];
+    final movies = popularFilmsState.value?.results ?? [];
     _navigateToSeeMorePage(context, movies);
   }
 

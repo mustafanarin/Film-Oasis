@@ -2,14 +2,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:film_oasis/feature/home/model/now_showing_model.dart';
 import 'package:film_oasis/feature/home/model/popular_film_model.dart';
 import 'package:film_oasis/feature/home/page/home/mixin/home_page_mixin.dart';
-import 'package:film_oasis/feature/home/state/now_showing_state.dart';
-import 'package:film_oasis/feature/home/state/popular_films_state.dart';
 import 'package:film_oasis/product/constants/project_colors.dart';
 import 'package:film_oasis/product/constants/project_strings.dart';
 import 'package:film_oasis/product/extensions/context_extension.dart';
 import 'package:film_oasis/product/navigate/app_router.gr.dart';
 import 'package:film_oasis/product/provider/app_provider_items.dart';
 import 'package:film_oasis/product/widgets/cached_network_image.dart';
+import 'package:film_oasis/product/widgets/error_view.dart';
 import 'package:film_oasis/product/widgets/genre_chips.dart';
 import 'package:film_oasis/product/widgets/release_date_text.dart';
 import 'package:film_oasis/product/widgets/see_more_button.dart';
@@ -36,9 +35,6 @@ class _HomePageState extends ConsumerState<HomePage> with HomePageMixin, Automat
     // language provider for listen
     ref.watch(AppProviderItems.languageProvider);
 
-    final nowShowing = nowShowingState;
-    final popularFilms = popularFilmsState;
-
     return Scaffold(
       appBar: const _AppbarHomePage(),
       body: SingleChildScrollView(
@@ -50,12 +46,12 @@ class _HomePageState extends ConsumerState<HomePage> with HomePageMixin, Automat
                 title: ProjectStrings.showingTitle,
                 onPressed: () => navigateToNowShowing(context),
               ),
-              _ListViewNowShowing(nowShowing: nowShowing),
+              const _ListViewNowShowing(),
               _RowTitleAndButton(
                 title: ProjectStrings.popularTitle,
                 onPressed: () => navigateToPopular(context),
               ),
-              _PopularFilmsSection(popularFilms: popularFilms),
+              const _PopularFilmsSection(),
             ],
           ),
         ),

@@ -9,9 +9,12 @@
       "theme_dark_text": "Karanlık Tema",
       "language_text": "Türkçe",
       "ok_text": "Tamam",
-      "settings": "Ayarlar"
+      "settings": "Ayarlar",
+      "tryAgain": "Tekrar Dene",
+      "dontLoadData": "Veriler yüklenemedi"
     },
     "detail": {
+      "detail_title": "Film Detay",
       "snackbar_link_error": "Bir hata oluştu, lütfen daha sonra tekrar deneyin.",
       "snackbar_action_text": "Kapat",
       "country": "Ülke",

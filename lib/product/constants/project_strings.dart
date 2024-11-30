@@ -17,8 +17,11 @@ abstract final class ProjectStrings {
   static String get languageText => 'home.language_text'.tr();
   static String get okText => 'home.ok_text'.tr();
   static String get settings => 'home.settings'.tr();
+  static String get tryAgain => 'home.tryAgain'.tr();
+  static String get dontLoadData => 'home.dontLoadData'.tr();
 
   // Detail Page
+  static String get detailTitle => 'detail.detail_title'.tr();
   static String get snackBarLinkError => 'detail.snackbar_link_error'.tr();
   static String get snacbarActionText => 'detail.snackbar_action_text'.tr();
   static String get country => 'detail.country'.tr();

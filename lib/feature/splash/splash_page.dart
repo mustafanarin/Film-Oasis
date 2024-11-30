@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:film_oasis/feature/splash/mixin/splash_pahe_mixin.dart';
+import 'package:film_oasis/feature/splash/mixin/splash_page_mixin.dart';
 import 'package:film_oasis/product/constants/enum/json_path.dart';
 import 'package:film_oasis/product/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +13,7 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMixin, SplashPaheMixin {
+class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMixin, SplashPageMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
