@@ -14,15 +14,15 @@ Film Oasis is a modern Flutter application that provides users with a seamless m
 - **Responsive Design**: Works seamlessly across different screen sizes
 
 ## 📱 Screenshots
-<img width="323" alt="Ekran Resmi 2024-11-24 17 26 56" src="https://github.com/user-attachments/assets/d551e611-9fef-4c0a-8311-e657f27a1343">
-<img width="323" alt="Ekran Resmi 2024-11-24 17 27 35" src="https://github.com/user-attachments/assets/ecf2226a-e741-4b0a-846c-d19df2a4a404">
-<img width="323" alt="Ekran Resmi 2024-11-24 17 43 28" src="https://github.com/user-attachments/assets/619c3a28-7b48-4c3c-92c0-37cc207bca30">
-<img width="323" alt="Ekran Resmi 2024-11-24 17 29 16" src="https://github.com/user-attachments/assets/71fd4748-4fbb-4d8e-96f5-6b6ea76ee0d5">
-<img width="323" alt="Ekran Resmi 2024-11-24 17 30 55" src="https://github.com/user-attachments/assets/249f26ee-39b7-43be-97cd-beae0761ffd0">
-<img width="323" alt="Ekran Resmi 2024-11-24 17 31 18" src="https://github.com/user-attachments/assets/146037ac-50ab-4ddb-aed9-4ccdaca79f8d">
-<img width="323" alt="Ekran Resmi 2024-11-24 17 31 57" src="https://github.com/user-attachments/assets/5d516754-48fb-4aef-b6fb-a41803069fe1">
-<img width="323" alt="Ekran Resmi 2024-11-24 17 32 24" src="https://github.com/user-attachments/assets/deb19767-1655-4e5b-bb12-dfba23269cb7">
-<img width="323" alt="Ekran Resmi 2024-11-24 17 32 40" src="https://github.com/user-attachments/assets/dea79ed7-1894-4637-88db-2a286d28813b">
+<img width="263" alt="Ekran Resmi 2024-12-03 18 25 44" src="https://github.com/user-attachments/assets/05cea3b7-c87a-49dc-98cb-a614b63fa7b1">
+<img width="263" alt="Ekran Resmi 2024-12-03 18 25 58" src="https://github.com/user-attachments/assets/f73f5a65-9fd4-468e-9c8a-dd4d417c6a32">
+<img width="263" alt="Ekran Resmi 2024-12-03 18 26 24" src="https://github.com/user-attachments/assets/9191dc39-a6a1-49b8-895a-41ad804e0662">
+<img width="263" alt="Ekran Resmi 2024-12-03 18 26 47" src="https://github.com/user-attachments/assets/4fe41dec-345c-46f4-8ec4-d4404ae63280">
+<img width="263" alt="Ekran Resmi 2024-12-03 18 28 03" src="https://github.com/user-attachments/assets/7d3626ba-291e-4ebf-8b10-e2fa6db9783b">
+<img width="263" alt="Ekran Resmi 2024-12-03 18 28 28" src="https://github.com/user-attachments/assets/6dc7c0c4-0af0-4060-8831-c86e9b5c82a5">
+<img width="263" alt="Ekran Resmi 2024-12-03 18 28 53" src="https://github.com/user-attachments/assets/47891ae2-0c09-4f49-b7ab-3a8f12c14566">
+<img width="263" alt="Ekran Resmi 2024-12-03 18 29 13" src="https://github.com/user-attachments/assets/4bcf2442-5ec9-4afc-8f71-0a36bb268900">
+<img width="263" alt="Ekran Resmi 2024-12-03 18 29 28" src="https://github.com/user-attachments/assets/4998caff-1a92-4bf7-9481-36b9ae8079b8">
 
 
 
@@ -104,8 +104,7 @@ lib/
 │   │   │   ├── detail/
 │   │   │   ├── home/
 │   │   │   └── see_more/
-│   │   ├── provider/
-│   │   └── state/
+│   │   └── provider/ 
 │   ├── search/
 │   │   ├── model/
 │   │   ├── page/
@@ -126,3 +125,9 @@ lib/
 ├── service/
 └── main.dart
 ```
+
+## 📱 Demo Video
+https://github.com/user-attachments/assets/f9ee35c4-5d05-47eb-b176-db818c977e99
+
+
+
