@@ -1,5 +1,7 @@
 enum ProjectElevation {
-  small(5);
+  zero(0),
+  small(5),
+  medium(8);
 
   const ProjectElevation(this.value);
 

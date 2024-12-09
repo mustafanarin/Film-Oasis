@@ -1,4 +1,5 @@
 import 'package:film_oasis/product/constants/enum/icon_sizes.dart';
+import 'package:film_oasis/product/constants/enum/project_elevation.dart';
 import 'package:film_oasis/product/constants/enum/project_radius.dart';
 import 'package:film_oasis/product/constants/enum/widget_padding.dart';
 import 'package:film_oasis/product/constants/project_colors.dart';
@@ -9,38 +10,33 @@ abstract final class AppTheme {
         appBarTheme: AppBarTheme(
           centerTitle: true,
           titleTextStyle: _ProjectTextStyle.bodyLarge,
-          elevation: 0,
-          scrolledUnderElevation: 0,
+          elevation: ProjectElevation.zero.value,
+          scrolledUnderElevation: ProjectElevation.zero.value,
           backgroundColor: ProjectColors.white,
           iconTheme: IconThemeData(
             size: IconSizes.normal.value,
           ),
         ),
         scaffoldBackgroundColor: ProjectColors.white,
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: ProjectColors.white,
           selectedItemColor: ProjectColors.black,
           unselectedItemColor: ProjectColors.grey,
           showSelectedLabels: false,
           showUnselectedLabels: false,
           type: BottomNavigationBarType.fixed,
-          elevation: 8,
+          elevation: ProjectElevation.medium.value,
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: ProjectColors.white,
             foregroundColor: ProjectColors.grey,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(ProjectRadius.large.value),
-              ),
+              borderRadius: AppRadius.allLarge(),
               side: BorderSide(color: ProjectColors.grey.withOpacity(0.50)),
             ),
-            padding: EdgeInsets.symmetric(
-              horizontal: WidgetPadding.normal.value,
-              vertical: WidgetPadding.zero.value,
-            ),
-            elevation: 0,
+            padding: AppPadding.symmetric(),
+            elevation: ProjectElevation.zero.value,
           ),
         ),
         snackBarTheme: const SnackBarThemeData(
@@ -71,8 +67,8 @@ abstract final class AppTheme {
           titleTextStyle: _ProjectTextStyle.bodyLarge.copyWith(
             color: ProjectColors.darkTextColor,
           ),
-          elevation: 0,
-          scrolledUnderElevation: 0,
+          elevation: ProjectElevation.zero.value,
+          scrolledUnderElevation: ProjectElevation.zero.value,
           backgroundColor: ProjectColors.darkBackground,
           iconTheme: IconThemeData(
             size: IconSizes.normal.value,
@@ -87,23 +83,18 @@ abstract final class AppTheme {
           showSelectedLabels: false,
           showUnselectedLabels: false,
           type: BottomNavigationBarType.fixed,
-          elevation: 8,
+          elevation: ProjectElevation.medium.value,
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: ProjectColors.darkSurface,
             foregroundColor: ProjectColors.darkTextColor,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(ProjectRadius.large.value),
-              ),
+              borderRadius: AppRadius.allLarge(),
               side: BorderSide(color: ProjectColors.grey.withOpacity(0.50)),
             ),
-            padding: EdgeInsets.symmetric(
-              horizontal: WidgetPadding.normal.value,
-              vertical: WidgetPadding.zero.value,
-            ),
-            elevation: 0,
+            padding: AppPadding.symmetric(),
+            elevation: ProjectElevation.zero.value,
           ),
         ),
         snackBarTheme: const SnackBarThemeData(

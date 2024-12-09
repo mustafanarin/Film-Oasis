@@ -9,7 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 mixin DetailPageMixin on ConsumerState<DetailPage> {
-  static final _errorMessageDuration = Duration(seconds: AppDuration.two.value);
+  static final _errorMessageDuration = AppDuration.TwoSeconds();
 
   @override
   void initState() {
@@ -39,7 +39,7 @@ mixin DetailPageMixin on ConsumerState<DetailPage> {
   void _errorScafoldMesenger(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content:  Text(
+        content: Text(
           ProjectStrings.snackBarLinkError,
         ),
         duration: _errorMessageDuration,
@@ -67,9 +67,7 @@ mixin DetailPageMixin on ConsumerState<DetailPage> {
   BoxDecoration topRadiusDecoration() {
     return BoxDecoration(
       color: Theme.of(context).scaffoldBackgroundColor,
-      borderRadius: BorderRadius.vertical(
-        top: Radius.circular(ProjectRadius.small.value),
-      ),
+      borderRadius: AppRadius.smallTopVerical(),
     );
   }
 }

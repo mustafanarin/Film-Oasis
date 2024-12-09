@@ -33,7 +33,7 @@ class ProjectCachedImage extends StatelessWidget {
   static final customCacheManager = CacheManager(
     Config(
       _CacheKey.filmOasisCacheKey.name,
-      stalePeriod: Duration(days: AppDuration.three.value),
+      stalePeriod: AppDuration.ThreeDays(),
       maxNrOfCacheObjects: 100,
     ),
   );
@@ -52,7 +52,7 @@ class ProjectCachedImage extends StatelessWidget {
 
     final finalImageUrl = '${ProjectStrings.filmImagePath}$imageUrl';
     final imageWidget = ClipRRect(
-      borderRadius: borderRadius ?? BorderRadius.circular(ProjectRadius.xSmall.value),
+      borderRadius: borderRadius ?? AppRadius.xSmallCircular(),
       child: CachedNetworkImage(
         color: color,
         imageUrl: finalImageUrl,
@@ -60,8 +60,8 @@ class ProjectCachedImage extends StatelessWidget {
         width: width,
         fit: fit,
         cacheManager: customCacheManager,
-        fadeInDuration: Duration(milliseconds: AppDuration.smallMilliSeconds.value),
-        fadeOutDuration: Duration(milliseconds: AppDuration.smallMilliSeconds.value),
+        fadeInDuration: AppDuration.SmallMilliSeconds(),
+        fadeOutDuration: AppDuration.SmallMilliSeconds(),
         memCacheHeight: (height ?? 300).toInt() * 2,
         placeholder: (context, url) => const Center(
           child: CircularProgressIndicator.adaptive(),

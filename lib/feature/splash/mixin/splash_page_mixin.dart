@@ -11,7 +11,7 @@ mixin SplashPageMixin on State<SplashScreen> {
   void initState() {
     super.initState();
     controller = AnimationController(
-      duration: Duration(seconds: AppDuration.two.value),
+      duration: AppDuration.TwoSeconds(),
       vsync: this as TickerProvider,
     );
 

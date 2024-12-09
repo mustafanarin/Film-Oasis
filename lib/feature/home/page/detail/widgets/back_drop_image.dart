@@ -1,4 +1,5 @@
 part of '../detail_page.dart';
+
 class _BackdropImage extends StatelessWidget {
   const _BackdropImage({
     required this.film,
@@ -24,7 +25,7 @@ class _BackdropImage extends StatelessWidget {
           left: context.dynamicWidth(0.45),
           child: CircleAvatar(
             backgroundColor: Colors.white,
-            radius: ProjectRadius.medium.value,
+            radius: RadiusValue.medium.value,
             child: IconButton(
               onPressed: onLinkPressed,
               icon: const Icon(

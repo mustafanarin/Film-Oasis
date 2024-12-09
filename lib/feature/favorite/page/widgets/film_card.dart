@@ -12,13 +12,13 @@ class _FilmCard extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(ProjectRadius.medium.value),
+        borderRadius: AppRadius.mediumCircular(),
         boxShadow: [
           _BoxShadowSettings(isDarkMode),
         ],
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(ProjectRadius.medium.value),
+        borderRadius: AppRadius.mediumCircular(),
         child: Material(
           color: isDarkMode ? Theme.of(context).colorScheme.surface.withOpacity(0.8) : Theme.of(context).cardColor,
           child: InkWell(
@@ -149,7 +149,7 @@ class _FilmImdb extends StatelessWidget {
               Colors.black.withOpacity(0.5),
             ],
           ),
-          borderRadius: BorderRadius.circular(ProjectRadius.small.value),
+          borderRadius: AppRadius.smallCircular(),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -193,7 +193,7 @@ class _FavoriteIconButton extends StatelessWidget {
         builder: (context, ref, child) => Material(
           color: Colors.transparent,
           child: InkWell(
-            borderRadius: BorderRadius.circular(ProjectRadius.small.value),
+            borderRadius: AppRadius.smallCircular(),
             onTap: () {
               ref.read(AppProviderItems.favoriteProvider.notifier).toggleFavorite(film);
             },

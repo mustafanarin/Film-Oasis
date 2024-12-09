@@ -34,7 +34,6 @@ class SearchResultsHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return SliverToBoxAdapter(
       child: Padding(
         padding: EdgeInsets.all(context.lowValue2),
@@ -52,13 +51,13 @@ class SearchResultsHeader extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                 color: ProjectColors.cobaltBlue,
-                borderRadius: BorderRadius.circular(ProjectRadius.small.value),
+                borderRadius: AppRadius.smallCircular(),
               ),
               child: Text(
                 resultCount.toString(),
                 style: context.textTheme().labelSmall?.copyWith(
-                  color: ProjectColors.white,
-                ),
+                      color: ProjectColors.white,
+                    ),
               ),
             ),
           ],
@@ -94,4 +93,3 @@ class _FavoritesGrid extends StatelessWidget {
     );
   }
 }
-

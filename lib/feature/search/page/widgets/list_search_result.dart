@@ -2,7 +2,8 @@ part of '../search_page.dart';
 
 final class _ListViewSearchResult extends StatelessWidget {
   const _ListViewSearchResult({
-    required this.state, required this.searchQuery,
+    required this.state,
+    required this.searchQuery,
   });
 
   final SearchState state;
@@ -29,7 +30,7 @@ final class _ListViewSearchResult extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                     color: ProjectColors.cobaltBlue,
-                    borderRadius: BorderRadius.circular(ProjectRadius.small.value),
+                    borderRadius: AppRadius.smallCircular(),
                   ),
                   child: Text(
                     "${state.searchModel.results?.length ?? 0}",

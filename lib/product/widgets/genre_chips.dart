@@ -12,15 +12,14 @@ class GenreChips extends StatelessWidget {
     this.genreModel,
   });
 
-  
   const GenreChips.fromIds({
     required this.genreIds,
     required this.genreModel,
     super.key,
   }) : genres = null;
 
-  final List<Genre>? genres; // For Detail Page 
-  final List<int>? genreIds; // For Home Page 
+  final List<Genre>? genres; // For Detail Page
+  final List<int>? genreIds; // For Home Page
   final GenreModel? genreModel; // For Home Page
 
   @override
@@ -40,7 +39,7 @@ class GenreChips extends StatelessWidget {
       runSpacing: 4,
       children: displayGenres.map((genre) {
         return ClipRRect(
-          borderRadius: BorderRadius.circular(ProjectRadius.small.value),
+          borderRadius: AppRadius.smallCircular(),
           child: Container(
             padding: EdgeInsets.symmetric(
               horizontal: context.lowValue2,
