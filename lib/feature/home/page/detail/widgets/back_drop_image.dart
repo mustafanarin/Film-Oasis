@@ -13,12 +13,15 @@ class _BackdropImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        ProjectCachedImage(
-          imageUrl: film.backdropPath,
-          height: context.dynamicHeight(0.32),
-          width: context.dynamicWidth(1),
-          withShadow: false,
-          isBackdrop: true,
+        Hero(
+          tag: 'movie_${film.id}', 
+          child: ProjectCachedImage(
+            imageUrl: film.backdropPath,
+            height: context.dynamicHeight(0.32),
+            width: context.dynamicWidth(1),
+            withShadow: false,
+            isBackdrop: true,
+          ),
         ),
         Positioned(
           top: context.dynamicHeight(0.13),

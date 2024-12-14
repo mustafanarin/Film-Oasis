@@ -9,7 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 mixin SearchPageMixin on ConsumerState<SearchPage> {
   late final TextEditingController searchController;
   Timer? _debounceTimer;
-  static final _debounceDuration = AppDuration.MediumMilliSeconds();
+  static final _debounceDuration = AppDuration.mediumMilliSeconds();
 
   @override
   void initState() {

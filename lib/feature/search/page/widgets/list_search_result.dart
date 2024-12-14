@@ -72,7 +72,7 @@ class _CardFilmItem extends StatelessWidget {
       child: Card(
         color: isDarkMode
             ? Color.lerp(ProjectColors.darkSurface, ProjectColors.cobaltBlue, 0.05)
-            : Theme.of(context).scaffoldBackgroundColor,
+            : context.scaffoldColor,
         elevation: ProjectElevation.small.value,
         child: ListTile(
           contentPadding: context.paddingAllLow1,

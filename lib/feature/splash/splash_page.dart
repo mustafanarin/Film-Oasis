@@ -18,18 +18,14 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: context.scaffoldColor,
       body: Center(
         child: Lottie.asset(
           height: context.dynamicHeight(0.19),
           width: context.dynamicHeight(0.19),
           JsonPath.movieLottie.path,
           controller: controller,
-          onLoaded: (composition) {
-            controller
-              ..duration = composition.duration
-              ..forward();
-          },
+          onLoaded: handleCompositionLoaded,
         ),
       ),
     );

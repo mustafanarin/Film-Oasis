@@ -7,12 +7,12 @@ import 'package:film_oasis/product/constants/project_strings.dart';
 import 'package:film_oasis/product/extensions/context_extension.dart';
 import 'package:film_oasis/product/navigate/app_router.gr.dart';
 import 'package:film_oasis/product/provider/app_provider_items.dart';
-import 'package:film_oasis/product/widgets/cached_network_image.dart';
-import 'package:film_oasis/product/widgets/error_view.dart';
-import 'package:film_oasis/product/widgets/genre_chips.dart';
-import 'package:film_oasis/product/widgets/release_date_text.dart';
-import 'package:film_oasis/product/widgets/see_more_button.dart';
-import 'package:film_oasis/product/widgets/text_film_imbd.dart';
+import 'package:film_oasis/product/widgets/image/cached_network_image.dart';
+import 'package:film_oasis/product/widgets/general/error_view.dart';
+import 'package:film_oasis/product/widgets/general/genre_chips.dart';
+import 'package:film_oasis/product/widgets/text/release_date_text.dart';
+import 'package:film_oasis/product/widgets/button/see_more_button.dart';
+import 'package:film_oasis/product/widgets/text/text_film_imbd.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

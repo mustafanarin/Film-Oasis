@@ -9,10 +9,10 @@ import 'package:film_oasis/product/constants/project_strings.dart';
 import 'package:film_oasis/product/extensions/context_extension.dart';
 import 'package:film_oasis/product/navigate/app_router.gr.dart';
 import 'package:film_oasis/product/provider/app_provider_items.dart';
-import 'package:film_oasis/product/widgets/project_textfield.dart';
-import 'package:film_oasis/product/widgets/release_date_text.dart';
-import 'package:film_oasis/product/widgets/search_clear_button.dart';
-import 'package:film_oasis/product/widgets/text_film_imbd.dart';
+import 'package:film_oasis/product/widgets/textfield/project_textfield.dart';
+import 'package:film_oasis/product/widgets/text/release_date_text.dart';
+import 'package:film_oasis/product/widgets/button/search_clear_button.dart';
+import 'package:film_oasis/product/widgets/text/text_film_imbd.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

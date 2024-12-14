@@ -33,7 +33,7 @@ class ProjectCachedImage extends StatelessWidget {
   static final customCacheManager = CacheManager(
     Config(
       _CacheKey.filmOasisCacheKey.name,
-      stalePeriod: AppDuration.ThreeDays(),
+      stalePeriod: AppDuration.threeDays(),
       maxNrOfCacheObjects: 100,
     ),
   );
@@ -60,8 +60,8 @@ class ProjectCachedImage extends StatelessWidget {
         width: width,
         fit: fit,
         cacheManager: customCacheManager,
-        fadeInDuration: AppDuration.SmallMilliSeconds(),
-        fadeOutDuration: AppDuration.SmallMilliSeconds(),
+        fadeInDuration: AppDuration.smallMilliSeconds(),
+        fadeOutDuration: AppDuration.smallMilliSeconds(),
         memCacheHeight: (height ?? 300).toInt() * 2,
         placeholder: (context, url) => const Center(
           child: CircularProgressIndicator.adaptive(),

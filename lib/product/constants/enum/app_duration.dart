@@ -11,10 +11,10 @@ enum DurationValues {
 }
 
 final class AppDuration extends Duration {
-  AppDuration.SmallMilliSeconds() : super(milliseconds: DurationValues.smallMilliSeconds.value);
-  AppDuration.MediumMilliSeconds() : super(milliseconds: DurationValues.mediumMilliSeconds.value);
-  AppDuration.OneSeconds() : super(seconds: DurationValues.one.value);
-  AppDuration.TwoSeconds() : super(seconds: DurationValues.two.value);
-  AppDuration.ThreeSeconds() : super(seconds: DurationValues.three.value);
-  AppDuration.ThreeDays() : super(days: DurationValues.three.value);
+  AppDuration.smallMilliSeconds() : super(milliseconds: DurationValues.smallMilliSeconds.value);
+  AppDuration.mediumMilliSeconds() : super(milliseconds: DurationValues.mediumMilliSeconds.value);
+  AppDuration.oneSeconds() : super(seconds: DurationValues.one.value);
+  AppDuration.twoSeconds() : super(seconds: DurationValues.two.value);
+  AppDuration.threeSeconds() : super(seconds: DurationValues.three.value);
+  AppDuration.threeDays() : super(days: DurationValues.three.value);
 }

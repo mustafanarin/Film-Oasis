@@ -11,7 +11,7 @@ mixin FavoritePageMixin on ConsumerState<FavoritesPage> {
   late final TextEditingController searchController;
   late final FocusNode searchFocusNode;
   late final AnimationController animationController;
-  static final _animationDuration = AppDuration.SmallMilliSeconds();
+  static final _animationDuration = AppDuration.smallMilliSeconds();
 
   @override
   void initState() {

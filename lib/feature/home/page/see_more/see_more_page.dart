@@ -2,8 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:film_oasis/feature/home/page/see_more/mixin/see_more_page_mixin.dart';
 import 'package:film_oasis/product/extensions/context_extension.dart';
 import 'package:film_oasis/product/navigate/app_router.gr.dart';
-import 'package:film_oasis/product/widgets/cached_network_image.dart';
-import 'package:film_oasis/product/widgets/text_film_imbd.dart';
+import 'package:film_oasis/product/widgets/image/cached_network_image.dart';
+import 'package:film_oasis/product/widgets/text/text_film_imbd.dart';
 import 'package:flutter/material.dart';
 
 part './widgets/column_film_items.dart';

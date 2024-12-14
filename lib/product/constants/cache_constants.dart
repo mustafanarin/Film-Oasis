@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart' show immutable;
 
 @immutable
-abstract class CacheConstants {
+abstract final class CacheConstants {
   static const String themeBox = 'theme_box';
   static const String isDarkMode = 'is_dark_mode';
 

@@ -25,7 +25,7 @@ class TabbarPage extends HookWidget {
             FavoritesPage(),
           ],
         ),
-      ),
+      ),  
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(

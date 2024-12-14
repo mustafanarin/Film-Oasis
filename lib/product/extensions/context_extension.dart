@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart' show BuildContext, EdgeInsets, MediaQuery, TextTheme, Theme;
+import 'package:flutter/material.dart' show BuildContext, Color, EdgeInsets, MediaQuery, TextTheme, Theme;
 
 extension BuildContextExtension on BuildContext {
   double dynamicHeight(double value) => MediaQuery.sizeOf(this).height * value;
@@ -7,6 +7,8 @@ extension BuildContextExtension on BuildContext {
   TextTheme textTheme() {
     return Theme.of(this).textTheme;
   }
+
+  Color get scaffoldColor => Theme.of(this).scaffoldBackgroundColor;
 }
 
 extension NumberExtension on BuildContext {

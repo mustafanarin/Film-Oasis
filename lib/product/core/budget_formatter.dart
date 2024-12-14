@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 
-class FormatNumber {
+class BudgetFormatter {
   static String formatBudgetWithDots(int? budget) {
     if (budget == null || budget == 0) {
       return '-';

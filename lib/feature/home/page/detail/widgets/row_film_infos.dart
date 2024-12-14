@@ -86,7 +86,7 @@ class _TextBudgetColumn extends StatelessWidget {
           style: context.textTheme().bodySmall,
         ),
         Text(
-          '${FormatNumber.formatBudgetWithDots(
+          '${BudgetFormatter.formatBudgetWithDots(
             film.budget,
           )} \$',
           style: context.textTheme().labelMedium,
