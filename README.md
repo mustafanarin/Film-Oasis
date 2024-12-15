@@ -23,6 +23,9 @@ Film Oasis is a modern Flutter application that provides users with a seamless m
 <img width="263" alt="Ekran Resmi 2024-12-03 18 28 53" src="https://github.com/user-attachments/assets/47891ae2-0c09-4f49-b7ab-3a8f12c14566">
 <img width="263" alt="Ekran Resmi 2024-12-03 18 29 13" src="https://github.com/user-attachments/assets/4bcf2442-5ec9-4afc-8f71-0a36bb268900">
 <img width="263" alt="Ekran Resmi 2024-12-03 18 29 28" src="https://github.com/user-attachments/assets/4998caff-1a92-4bf7-9481-36b9ae8079b8">
+<img width="262" alt="Ekran Resmi 2024-12-15 21 05 08" src="https://github.com/user-attachments/assets/f41d192c-1b7f-4359-b473-2b2ba53733b7" />
+<img width="262" alt="Ekran Resmi 2024-12-15 21 05 32" src="https://github.com/user-attachments/assets/867b8d6e-c872-472b-8249-36ad68fafa0e" />
+<img width="262" alt="Ekran Resmi 2024-12-15 21 06 31" src="https://github.com/user-attachments/assets/7256a2d5-6ac7-4d2d-90c5-94900c5c51d2" />
 
 
 
@@ -52,7 +55,6 @@ Film Oasis is a modern Flutter application that provides users with a seamless m
 ### Development Tools
 - very_good_analysis: ^6.0.0
 - build_runner: ^2.4.13
-- flutter_lints: ^4.0.0
 
 ## 🚀 Getting Started
 
