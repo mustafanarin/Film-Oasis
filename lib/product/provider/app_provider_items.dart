@@ -62,9 +62,9 @@ final class AppProviderItems {
   });
 
   static final languageProvider = StateNotifierProvider<LanguageNotifier, bool>((ref) {
-    final cacheManager = ref.watch(languageCacheProvider);
-    return LanguageNotifier(cacheManager);
-  });
+  final cacheManager = ref.watch(languageCacheProvider);
+  return LanguageNotifier(cacheManager, ref); 
+});
 
   // Theme
   static final themeCacheProvider = Provider<IThemeLanguageCacheManager<bool>>((ref) {
@@ -75,4 +75,6 @@ final class AppProviderItems {
     final cacheManager = ref.watch(themeCacheProvider);
     return ThemeNotifier(cacheManager);
   });
+
+  static final refreshTriggerProvider = StateProvider<int>((ref) => 0);
 }
